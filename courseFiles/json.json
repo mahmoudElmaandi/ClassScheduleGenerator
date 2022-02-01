@@ -1,0 +1,331 @@
+[
+    {
+        "ccname": "برمجة الشبكات",
+        "ccode": "CSC416",
+        "unit": "4",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "11,12,13,44,45",
+                "glecturer": "د. أسامة حلمي - م.م عبدالهادي "
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "14,15,16,47,48",
+                "glecturer": "د. أسامة حلمي - م.م دينا"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "56,57,58,42,43",
+                "glecturer": "د.  - م.م دينا"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "51,52,53,47,48",
+                "glecturer": "د.  - م.م عبدالهادي"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "11,12,13,27,28",
+                "glecturer": "د. أسامة حلمي  - م. نادين"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "14,15,16,31,32",
+                "glecturer": "د. أسامة حلمي  - م. دينا"
+            },
+            {
+                "gnumber": "G7",
+                "gtimes": "56,57,58,14,15",
+                "glecturer": "د.   - م. نادين"
+            },
+            {
+                "gnumber": "G8",
+                "gtimes": "51,52,53,41,42",
+                "glecturer": "د.   - م.م عبدالهادي"
+            }
+        ]
+    },
+    {
+        "ccname": "هندسة البرمجيات(٢)",
+        "ccode": "CSC414",
+        "unit": "4",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "24,25,26,34,35",
+                "glecturer": "د. سامح ظريف - م.م منى"
+            },
+            {
+                "gnumber": " G2",
+                "gtimes": "21,22,23,51,52",
+                "glecturer": "د. سامح ظريف - م.م سارة"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "51,52,53,27,28",
+                "glecturer": "د. مريان وجدي - م.م سارة"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "56,57,58,37,38",
+                "glecturer": "د. مريان وجدي - م.م منى"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "24,25,26,31,32",
+                "glecturer": "د. سامح ظريف - م.م منى"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "21,22,23,27,28",
+                "glecturer": "د. سامح ظريف - م.م منى"
+            },
+            {
+                "gnumber": "G7",
+                "gtimes": "51,52,53,54,55",
+                "glecturer": "د. مريان وجدي - م.م سارة"
+            },
+            {
+                "gnumber": "G8",
+                "gtimes": "56,57,58,54,55",
+                "glecturer": "د. مريان وجدي - م.م منى"
+            }
+        ]
+    },
+    {
+        "ccname": "الذكاء الاصطناعي",
+        "ccode": "CSC412",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "21,22,23,32,33",
+                "glecturer": "أ.م.د.يسرية أبو النجا - م.م نبيل"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "24,25,26,44,45",
+                "glecturer": "أ.م.د.يسرية أبو النجا - م.م كريم"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "31,32,33,54,55",
+                "glecturer": "أ.م.د.يسرية أبو النجا - م.م نبيل"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "34,35,36,54,55",
+                "glecturer": "أ.م.د.يسرية أبو النجا -م.م كريم"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "21,22,23,47,48",
+                "glecturer": "أ.م.د.يسرية أبو النجا -م.م كريم"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "24,25,26,41,42",
+                "glecturer": "أ.م.د.يسرية أبو النجا -م.م نبيل"
+            },
+            {
+                "gnumber": "G7",
+                "gtimes": "31,32,33,24,25",
+                "glecturer": "أ.م.د.يسرية أبو النجا -م.م كريم"
+            },
+            {
+                "gnumber": "G8",
+                "gtimes": "34,35,36,37,38",
+                "glecturer": "أ.م.د.يسرية أبو النجا -م.م كريم"
+            }
+        ]
+    },
+    {
+        "ccname": "النمذجة والمحاكاه",
+        "ccode": "CSC411",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "56,57,58,41,42",
+                "glecturer": "د.ابراهيم عمارة - م.م  بسنت"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "53,54,55,31,32",
+                "glecturer": "د.ابراهيم عمارة - م.م  بسنت"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "36,37,38,24,25",
+                "glecturer": "د.ابراهيم عمارة - م.م  بسنت"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "31,32,33,22,23",
+                "glecturer": "د.ابراهيم عمارة - م.م  بسنت"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "56,57,58,51,52",
+                "glecturer": "د.ابراهيم عمارة - م.م  بسنت"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "53,54,55,47,48",
+                "glecturer": "د.ابراهيم عمارة - م.م  بسنت"
+            },
+            {
+                "gnumber": "G7",
+                "gtimes": "36,37,38,34,35",
+                "glecturer": "د.ابراهيم عمارة - م.م كريم"
+            },
+            {
+                "gnumber": "G8",
+                "gtimes": "31,32,33,27,28",
+                "glecturer": "د.ابراهيم عمارة - م.م كريم"
+            }
+        ]
+    },
+    {
+        "ccname": "لغة إنجليزية(٥)",
+        "ccode": "BSC410",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "14,15,16",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "34,35,36",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "11,12,13",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "11,12,13",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "14,15,16",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "34,35,36",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G7",
+                "gtimes": "11,12,13",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G8",
+                "gtimes": "11,12,13",
+                "glecturer": "د."
+            }
+        ]
+    },
+    {
+        "ccname": "مقرر اختياري",
+        "ccode": "CSC42*",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "53,54,55,51,52",
+                "glecturer": "د. سامح ظريف - م. ايمان"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "56,57,58,37,38",
+                "glecturer": "د. سامح ظريف -م. سمر"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "21,22,23,34,35",
+                "glecturer": "د. مريان وجدي -م. ايمان"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "24,25,26,41,42",
+                "glecturer": "د. مريان وجدي -م. ايمان"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "53,54,55,34,35",
+                "glecturer": "د. سامح ظريف -م. سمر"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "56,57,58,51,52",
+                "glecturer": "د. سامح ظريف - م.آيه"
+            },
+            {
+                "gnumber": "G7",
+                "gtimes": "21,22,23,44,45",
+                "glecturer": "د. مريان وجدي - م.سمر"
+            },
+            {
+                "gnumber": "G8",
+                "gtimes": "24,25,26,21,22",
+                "glecturer": "د. مريان وجدي - م.سمر"
+            }
+        ]
+    },
+    {
+        "ccname": "مشروع",
+        "ccode": "CSC400",
+        "unit": "6",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "18",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "11",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "41",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "21",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "38",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "37",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G7",
+                "gtimes": "41",
+                "glecturer": "د."
+            },
+            {
+                "gnumber": "G8",
+                "gtimes": "14",
+                "glecturer": "د."
+            }
+        ]
+    }
+]

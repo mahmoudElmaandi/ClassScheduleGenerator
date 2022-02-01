@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Schedule Generator</title>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: system-ui !important;
+      width: 95%;
+      padding: 6px;
+      margin: auto;
+      font-weight: 500;
+    }
+
+    select {
+      height: 500px;
+      font-family: inherit;
+    }
+
+    option {
+      height: 30px;
+      direction: rtl;
+      text-align: right;
+      padding: 7px;
+      font-size: 14px;
+      font-family: inherit;
+      font-weight: 500;
+    }
+
+    #inputfile {
+      /* padding: 11px;
+  width: 100%;
+  text-align: center; */
+      font-size: 20px
+    }
+
+    #zero {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    textarea,
+    textarea:disabled {
+      width: 90%;
+      border: 2px solid #3079ed;
+      padding: 4px;
+      font-weight: 500;
+      font-size: 15px;
+      text-align: right;
+      direction: rtl;
+      font-family: inherit;
+      color: black;
+      background: white;
+    }
+
+    button {
+      margin: 5px;
+      padding: 5px 12px 5px 12px;
+      width: auto;
+      text-align: center;
+      font-size: 19px;
+      font-weight: 300;
+      color: #fffcfc;
+      background: #3f51b5;
+      border-radius: 5px;
+      border: 5px;
+      font-family: inherit;
+      font-weight: inherit;
+    }
+
+
+
+    button:hover {
+      background: #1a2a84;
+      color: #fff;
+      cursor: pointer;
+
+    }
+
+    div {
+      width: 100%;
+      text-align: center
+    }
+
+    @media only screen and (max-width: 600px) {
+      select {
+        height: 50px;
+        width: 100px;
+        border-radius: 12px;
+        direction: rtl;
+        text-align: right;
+
+      }
+
+      #hideCombinationTestBtn {
+        left: 20% !important;
+        font-size: 20px;
+      }
+
+      #delbtn {
+        font-size: 20px;
+      }
+
+      #HeaderP {
+        margin-top: 40px;
+      }
+
+    }
+
+    /* @media only screen and (max-width:600px) {
+  select {
+    height: 350px;
+    border-radius: 12px;
+    text-align: center;
+    width: 95%;
+  }
+} */
+
+    @media only screen and (min-width:600px) {
+      #HbtnDiv {
+        display: block;
+        width: auto;
+        position: fixed;
+        right: 0;
+        top: 2%;
+      }
+    }
+
+    div#header {
+      display: block;
+      width: auto;
+      direction: rtl
+    }
+
+    p {
+      direction: ltr
+    }
+
+    #TestSummary {
+      display: inline-block;
+      font-weight: 500;
+      font-size: 17px;
+      color: #fff;
+      background-color: #3f51b5;
+      border-radius: 2px;
+      padding: 5px;
+    }
+
+    .CombinationResultContainer {
+      display: block;
+      overflow: hidden;
+      background-color: #f1f1f1;
+      transition: max-height 0.2s ease-out;
+
+    }
+
+    #deleteCombinationTestBtn {
+      background-color: #F44336;
+      cursor: pointer;
+      position: absolute;
+      left: 2.5%;
+      width: fit-content;
+      height: fit-content;
+      padding: 4px;
+      margin: 1px;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    #hideCombinationTestBtn {
+      background-color: #3079ed;
+      cursor: pointer;
+      position: absolute;
+      left: 5.6%;
+      width: fit-content;
+      height: fit-content;
+      padding: 4px;
+      margin: 1px;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .collapsible {
+      background-color: #3f51b5;
+      color: white;
+      cursor: pointer;
+      padding: 5px;
+      width: 50%;
+      border: none;
+      text-align: center;
+      outline: none;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .active,
+    .collapsible:hover {
+      background-color: #f1f1f1;
+      color: #050505;
+      border: 3px #3f51b5 solid;
+    }
+
+    .collapsible:after {
+      content: '\002B';
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .active:after {
+      content: "\2212";
+      color: black;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+
+    div#HbtnDiv button {
+      margin: 5px;
+      display: inline-block;
+      display: block;
+    }
+
+    #Schedule thead,
+    td.celly3 {
+      background-color: #3f51b5;
+      color: white;
+
+    }
+
+    th.celly1,
+    td.celly {
+      border: 1px solid #000;
+    }
+
+    td.celly {
+      background-color: #f1f1f1;
+      direction: rtl;
+    }
+
+    td.celly1,
+    td.celly2,
+    td.celly3 {
+      padding: 3px;
+      font-size: 14px;
+    }
+
+    td.celly {
+      font-size: 13px;
+    }
+
+    td.celly2 {
+      background-color: #3867b3;
+      color: white;
+      direction: rtl;
+    }
+
+    select#TableSelectT {
+      height: 25px;
+      font-family: inherit;
+    }
+
+    table#Schedule {
+      width: 100%;
+      display: none;
+    }
+
+    select#Dep {
+      height: 50px;
+      width: 150px;
+      text-align: right;
+      padding: 9px;
+      margin: 10px;
+      direction: rtl;
+      font-size: 20px;
+      font-family: inherit;
+      border: groove;
+    }
+
+    #Dep option {
+      text-align: right;
+      font-size: 17px;
+      padding: 41px;
+      margin: 18px;
+      height: 40px;
+    }
+
+    #selectdep p {
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    #ScheduleDiv {
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    .seperator {
+      height: 2px;
+      background-color: #c8c8c8;
+      border-bottom: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: #fff;
+      margin-left: -15px;
+      margin-right: -15px;
+      margin-bottom: 15px;
+      margin-top: 5px;
+    }
+
+    #selectdep {
+      direction: rtl;
+      width: 100%
+    }
+
+    a {
+      text-decoration: auto;
+    }
+
+    span#drName {
+      color: #0329fd;
+    }
+
+    /* new */
+
+    #attendanceDiv {
+      direction: rtl;
+    }
+
+    p#tableInfo {
+      text-align: center;
+      direction: rtl;
+      font-size: 14px;
+      padding: 0px;
+      margin: 5px;
+    }
+
+    table#Schedule {
+      width: 100% !important;
+      float: none;
+      text-align: center;
+    }
+
+    /* div#ScheduleDiv {
+  height: 1000px;
+} */
+
+    p#tableInfo {
+      /* font-size: 16px; */
+    }
+
+    @media only screen and (max-width: 425px) {
+      table#Schedule {
+
+        width: 100% !important;
+        margin: 0;
+        padding: 0;
+        float: none;
+
+      }
+
+      td {
+        text-overflow: ellipsis !important;
+        word-wrap: break-word !important;
+        font-size: 10px !important;
+        padding: 0px !important;
+        font-weight: bold !important;
+        overflow: hidden;
+        word-break: break-word;
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      th.celly1 {
+        font-size: 12px !important;
+      }
+
+      td.celly2 {
+        font-size: 11px !important;
+      }
+
+      td.celly3 {
+        width: 35px;
+        height: 10px;
+      }
+
+      span#drName {
+        display: none !important;
+      }
+
+      p#tableInfo {
+        font-size: 13px;
+      }
+    }
+
+    #invalidMessages {
+      color: red;
+      font-size: 16px;
+      padding-top: 30px;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div id='header'>
+    <div class="seperator"></div>
+    <p>اختر القسم لادخال المواد تلقائيا أو قم بتحميل ورفع ملف المواد<br> .ثم اختر المواد المراد تسجيلها ويمكنك اختيار
+      أكثر من مجموعة لنفس المادة <br />.لاختيار أكثر من عنصر crtl اضغط </p>
+  </div>
+  <div id="selectdep">
+
+    <select name="selectDep" id="Dep">
+      <option value="">إختر القسم </option>
+      <option value="cs">علوم حاسب</option>
+    </select>
+    <label for="selectDep"></label>
+
+
+    <input id='inputfile' name="sampleFile" hidden type='file' accept=".csv,.json" />
+
+
+    <!-- <input id='inputfile' hidden type='file' accept=".csv,.json" /> -->
+    <button id="fileSelect">اختر ملف المواد</button>
+
+    <div id="invalidMessages"></div>
+  </div>
+
+  <form id='zero' onsubmit='return false'>
+
+
+  </form>
+  <div id='failed'></div>
+  <div id='ScheduleDiv' style="display: none;">
+    <p id="tableInfo"></p>
+    <button id="printSchedule">طباعة الجدول</button>
+    <table class='tg' id='Schedule'>
+      <thead>
+        <tr>
+          <th class='celly1'>8</th>
+          <th class='celly1'>7</th>
+          <th class='celly1'>6</th>
+          <th class='celly1'>5</th>
+          <th class='celly1'>4</th>
+          <th class='celly1'>3</th>
+          <th class='celly1'>2</th>
+          <th class='celly1'>1</th>
+          <th class='celly1'>الفترة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class='celly2'>2:45 - 3:30</td>
+          <td class='celly2'>2:00 - 2:45</td>
+          <td class='celly2'>1:05 - 1:50</td>
+          <td class='celly2'>12:20 - 1:05</td>
+          <td class='celly2'>11:25 - 12:10</td>
+          <td class='celly2'>10:40 - 11:25</td>
+          <td class='celly2'>9:45 - 10:30</td>
+          <td class='celly2'>9:00 - 9:45</td>
+          <td class='celly2'>التوقيت</td>
+        </tr>
+        <tr>
+          <td class='celly'>18</td>
+          <td class='celly'>17</td>
+          <td class='celly'>16</td>
+          <td class='celly'>15</td>
+          <td class='celly'>14</td>
+          <td class='celly'>13</td>
+          <td class='celly'>12</td>
+          <td class='celly'>11</td>
+          <td class='celly3'>السبت</td>
+        </tr>
+        <tr>
+          <td class='celly'>28</td>
+          <td class='celly'>27</td>
+          <td class='celly'>26</td>
+          <td class='celly'>25</td>
+          <td class='celly'>24</td>
+          <td class='celly'>23</td>
+          <td class='celly'>22</td>
+          <td class='celly'>21</td>
+          <td class='celly3'>الأحد</td>
+        </tr>
+        <tr>
+          <td class='celly'>38</td>
+          <td class='celly'>37</td>
+          <td class='celly'>36</td>
+          <td class='celly'>35</td>
+          <td class='celly'>34</td>
+          <td class='celly'>33</td>
+          <td class='celly'>32</td>
+          <td class='celly'>31</td>
+          <td class='celly3'>الاثنين</td>
+        </tr>
+        <tr>
+          <td class='celly'>48</td>
+          <td class='celly'>47</td>
+          <td class='celly'>46</td>
+          <td class='celly'>45</td>
+          <td class='celly'>44</td>
+          <td class='celly'>43</td>
+          <td class='celly'>42</td>
+          <td class='celly'>41</td>
+          <td class='celly3'>الثلاثاء</td>
+        </tr>
+        <tr>
+          <td class='celly'>58</td>
+          <td class='celly'>57</td>
+          <td class='celly'>56</td>
+          <td class='celly'>55</td>
+          <td class='celly'>54</td>
+          <td class='celly'>53</td>
+          <td class='celly'>52</td>
+          <td class='celly'>51</td>
+          <td class='celly3'>الأربعاء</td>
+        </tr>
+        <tr>
+          <td class='celly'>68</td>
+          <td class='celly'>67</td>
+          <td class='celly'>66</td>
+          <td class='celly'>65</td>
+          <td class='celly'>64</td>
+          <td class='celly'>63</td>
+          <td class='celly'>62</td>
+          <td class='celly'>61</td>
+          <td class='celly3'>الخميس</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="../dist/main.js"></script>
+</body>
+
+</html>

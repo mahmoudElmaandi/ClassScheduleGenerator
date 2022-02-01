@@ -1,0 +1,942 @@
+[
+    {
+        "ccname": "طرق احصائية",
+        "ccode": "BSC222",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "11,12,13,27,28",
+                "glecturer": "د.زاهر"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "14,15,16,31,32",
+                "glecturer": "د.فرحات"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "56,57,58,47,48",
+                "glecturer": "د.عبدالعظيم"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "11,12,13,34,35",
+                "glecturer": "د.فرحات"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "44,45,46,54,55",
+                "glecturer": "د.عبدالعظيم"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "41,42,43,24,25",
+                "glecturer": "د.محمد ابوزيد"
+            }
+        ]
+    },
+    {
+        "ccname": "مقرر ثقافى (١)",
+        "ccode": "HUM110",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "14,15",
+                "glecturer": "د.وليد"
+            }
+        ]
+    },
+    {
+        "ccname": "لغة إنجليزية(٢)",
+        "ccode": "BSC123",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "17,18",
+                "glecturer": "؟؟؟"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "57,58",
+                "glecturer": "؟؟"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "37,38",
+                "glecturer": "؟؟"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "14,15",
+                "glecturer": "؟؟"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "17,18",
+                "glecturer": "؟؟"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "31,32",
+                "glecturer": "؟؟"
+            }
+        ]
+    },
+    {
+        "ccname": "رياضة(١)",
+        "ccode": "BSC110",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "21,22,23,34,35",
+                "glecturer": "د.خالد"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "41,42,43,51,52",
+                "glecturer": "ا.م.د.رانيا بهجت"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "31,32,33,41,42",
+                "glecturer": "د."
+            }
+        ]
+    },
+    {
+        "ccname": "فيزياء",
+        "ccode": "BSC124",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "21,22,23,44,45",
+                "glecturer": "د.محمد رجب"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "41,42,43,24,25",
+                "glecturer": "د.محمد رجب"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "11,12,13,14,15",
+                "glecturer": "د.محمد رجب"
+            }
+        ]
+    },
+    {
+        "ccname": "البرمجة الهيكلية",
+        "ccode": "CSC121",
+        "unit": "4",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "24,25,26,41,42,43",
+                "glecturer": "د احمد جادالله - م.اية-م.بسنت"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "21,22,23,44,45,46",
+                "glecturer": "د احمد جادالله - م.الاء-م.بسنت"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "51,52,53,31,32,33",
+                "glecturer": "د.امجد - م.الاء-م.ايه"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "54,55,56,26,27,28",
+                "glecturer": "د.امجد - م.نبيل-م.اية"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "33,34,35,51,52,53",
+                "glecturer": "د.نادر - م.الاء-م.شروق"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "36,37,38,33,34,35",
+                "glecturer": "د.نادر - م.نبيل-م.شروق"
+            }
+        ]
+    },
+    {
+        "ccname": "بحوث عمليات",
+        "ccode": "BSC220",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "31,32,33,57,58",
+                "glecturer": "د.رانيا - م.اية"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "34,35,36,47,48",
+                "glecturer": "د.رانيا - م.شروق "
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "24,25,26,54,55",
+                "glecturer": "د.رانيا - م.شروق-م.اية  "
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "21,22,23,44,45",
+                "glecturer": "د.رانيا - م.اية  "
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "41,42,43,21,22",
+                "glecturer": "د.يسرية - م.اية  "
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "44,45,46,27,28",
+                "glecturer": "د.يسرية - م.شروق "
+            }
+        ]
+    },
+    {
+        "ccname": "رياضة(٢)",
+        "ccode": "BSC120",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "44,45,46,36,37",
+                "glecturer": "د. ؟؟"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "41,42,43,37,38",
+                "glecturer": "د.كمال رسلان"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "34,35,36,44,45",
+                "glecturer": "د.كمال رسلان"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "31,32,33,24,25",
+                "glecturer": "د.خالد"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "24,25,26,14,15",
+                "glecturer": "د.زاهر"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "21,22,23,47,48",
+                "glecturer": "د.محمد ابوزيد"
+            }
+        ]
+    },
+    {
+        "ccname": "تربية رياضية (١)",
+        "ccode": "PHE110",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "41,42",
+                "glecturer": "د. ؟"
+            }
+        ]
+    },
+    {
+        "ccname": "لغة إنجليزية(1)",
+        "ccode": "BSC114",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "47,48",
+                "glecturer": "د. ؟"
+            }
+        ]
+    },
+    {
+        "ccname": "الكترونيات(٢)",
+        "ccode": "BSC122",
+        "unit": "4",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "51,52,53,54,55,56",
+                "glecturer": "د.احمد مجدي - م.دينا"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "11,12,13,26,27,28",
+                "glecturer": "د.معتصم - م.دينا"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "14,15,16,21,22,23",
+                "glecturer": "د.معتصم - م.دينا"
+            }
+        ]
+    },
+    {
+        "ccname": "الكترونيات(١)",
+        "ccode": "BSC113",
+        "unit": "4",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "54,55,56,51,52,53",
+                "glecturer": "د.احمد مجدي - م.دينا"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "24,25,26,54,55,56",
+                "glecturer": "د.احمد ناصر - م.ايمان"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "21,22,23,36,37,38",
+                "glecturer": "د.احمد ناصر - م.دينا"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "51,52,53,46,47,48",
+                "glecturer": "د.عماد بدري - م.دينا"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "11,12,13,21,22,23",
+                "glecturer": "د.اسامة الكومي - م.ايمان"
+            }
+        ]
+    },
+    {
+        "ccname": "نظم التشغيل",
+        "ccode": "CSC222",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "11,12,13,24,25",
+                "glecturer": "د.باسل حافظ - م.عبدالهادي-شروق "
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "14,15,16,44,45",
+                "glecturer": "د.باسل حافظ - م.نادين-شروق"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "54,55,56,41,42",
+                "glecturer": "د.شريف شاروش - م.نادين-شروق "
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "51,52,53,37,38",
+                "glecturer": "د.شريف شاروش - م.عبدالهادي-شروق"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "24,25,26,31,32",
+                "glecturer": "د.باسل - م.عبدالهادي-شروق"
+            }
+        ]
+    },
+    {
+        "ccname": "نظم دعم واتخاذ القرار",
+        "ccode": "INF320",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "14,15,21,22",
+                "glecturer": "د.محمد عبداللطيف -م.منى-م.بسنت "
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "11,12,41,42",
+                "glecturer": "د.محمد عبداللطيف -م.منى "
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "17,18,37,38",
+                "glecturer": "د.محمد عبداللطيف -م.منى-م.بسنت"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "44,45,54,55",
+                "glecturer": "د.عبيد  -م.منى-م.بسنت"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "17,18,27,28",
+                "glecturer": "د.محمد عبداللطيف  -م.بسنت "
+            }
+        ]
+    },
+    {
+        "ccname": "مبادئ إدارة",
+        "ccode": "BSC213",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "17,18",
+                "glecturer": "??"
+            }
+        ]
+    },
+    {
+        "ccname": "لغة إنجليزية(٣)",
+        "ccode": "BSC214",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "27,28",
+                "glecturer": "??"
+            }
+        ]
+    },
+    {
+        "ccname": "تحليل نظم",
+        "ccode": "INF220",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "51,52,53,27,28",
+                "glecturer": "د.اسماء حنفي - م.نادين"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "54,55,56,37,38",
+                "glecturer": "د.اسماء حنفي - م.شيماء-م.نادين"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "31,32,33,24,25",
+                "glecturer": "د.سماح ابراهيم - م.شيماء-م.نادين"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "34,35,36,21,22",
+                "glecturer": "د.سماح ابراهيم -م.شيماء-م.نادين"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "41,42,43,47,48",
+                "glecturer": "د/عبيد -م.نادين"
+            }
+        ]
+    },
+    {
+        "ccname": "البرمجة المنطقية",
+        "ccode": "CSC324",
+        "unit": "4",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "31,32,33,47,48",
+                "glecturer": "د.اسامة حلمي - م.منى-م.بسنت"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "34,35,36,51,52",
+                "glecturer": "د.اسامة حلمي - م.منى-م.بسنت"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "14,15,16,34,35",
+                "glecturer": "د.اسامة حلمي - م.منى-م.بسنت"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "11,12,13,31,32",
+                "glecturer": "د.اسامة حلمي - م.منى-م.بسنت"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "54,55,56,57,58",
+                "glecturer": "د.عماد بدري - م.منى-م.بسنت"
+            }
+        ]
+    },
+    {
+        "ccname": "تنسيق ملفات",
+        "ccode": "INF221",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "34,35,36,37,38",
+                "glecturer": "د.علاء - م.الاء-م.ايمان"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "31,32,33,24,25",
+                "glecturer": "د.علاء - م.الاء-م.ايمان"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "11,12,13,47,48",
+                "glecturer": "د.عادل - م.الاء-م.ايمان"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "14,15,16,57,58",
+                "glecturer": "د.عادل - م.الاء-م.ايمان"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "21,22,23,34,35",
+                "glecturer": "د.باسل - م.الاء-م.ايمان"
+            }
+        ]
+    },
+    {
+        "ccname": "مبادئ الاقتصاد",
+        "ccode": "BSC224",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "41,42,43",
+                "glecturer": "??"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "46,47,48",
+                "glecturer": "??"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "21,22,23",
+                "glecturer": "??"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "24,25,26",
+                "glecturer": "??"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "11,12,13",
+                "glecturer": "??"
+            }
+        ]
+    },
+    {
+        "ccname": "رياضة(٣)",
+        "ccode": "BSC210",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "54,55,56,44,45",
+                "glecturer": "ا.م.د.رانيا بهجت"
+            }
+        ]
+    },
+    {
+        "ccname": "تربية رياضية(٢)",
+        "ccode": "PHE220",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "57,58",
+                "glecturer": "؟؟؟"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "21,22",
+                "glecturer": "؟؟؟"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "57,58",
+                "glecturer": "؟؟؟"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "41,42",
+                "glecturer": "؟؟؟"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "44,45",
+                "glecturer": "؟؟؟"
+            }
+        ]
+    },
+    {
+        "ccname": "لغة إنجليزية(٤)",
+        "ccode": "BSC320",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "11,12",
+                "glecturer": "???"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "14,15",
+                "glecturer": "???"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "17,18",
+                "glecturer": "???"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "21,22",
+                "glecturer": "???"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "27,28",
+                "glecturer": "???"
+            }
+        ]
+    },
+    {
+        "ccname": "مقرر ثقافى (٢)",
+        "ccode": "HUM320",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "34,35",
+                "glecturer": "د.اسامة المركبي"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "47,48",
+                "glecturer": "د.اسامة المركبي"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "41,42",
+                "glecturer": "د.اسامة المركبي"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "31,32",
+                "glecturer": "د.اسامة المركبي"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "44,45",
+                "glecturer": "د.اسامة المركبي"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "37,38",
+                "glecturer": "د.اسامة المركبي"
+            }
+        ]
+    },
+    {
+        "ccname": "بناء وتنظيم نظم الحاسبات ولغة التجميع",
+        "ccode": "CSC313",
+        "unit": "4",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "14,15,16,51,52,53",
+                "glecturer": "د.اسامة الكومي - م.اية"
+            }
+        ]
+    },
+    {
+        "ccname": "شبكات الحاسبات",
+        "ccode": "CSC322",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "31,32,33,17,18",
+                "glecturer": "د.سارة حمدي - م.عبدالهادي-م.نادين"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "11,12,34,35,36",
+                "glecturer": "د.سارة حمدي - م.عبدالهادي-م.نادين"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "54,55,56,34,35",
+                "glecturer": "د.سارة حمدي - م.عبدالهادي-م.نادين"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "51,52,53,44,45",
+                "glecturer": "د.سارة حمدي - م.دينا-م.عبدالهادي"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "31,32,33,14,15",
+                "glecturer": "د.سارة حمدي - م.عبدالهادي-م.نادين"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "34,35,36,41,42",
+                "glecturer": "د.سارة حمدي - م.دينا-م.عبدالهادي"
+            }
+        ]
+    },
+    {
+        "ccname": "رسم بواسطة الحاسب",
+        "ccode": "CSC323",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "21,22,23,57,58",
+                "glecturer": "د.ايمن سليمان-م.كريم-م.نبيل"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "24,25,26,52,53",
+                "glecturer": "د.ايمن سليمان-م.كريم-م.نبيل"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "11,12,13,22,23",
+                "glecturer": "د.انجي-م.كريم-م.نبيل"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "14,15,16,24,25",
+                "glecturer": "د.انجي-م.كريم-م.نبيل"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "54,55,56,42,43",
+                "glecturer": "د.عادل-م.كريم-م.نبيل"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "51,52,53,44,45",
+                "glecturer": "د.عادل-م.كريم-م.نبيل"
+            }
+        ]
+    },
+    {
+        "ccname": "الوسائط المتعددة",
+        "ccode": "CSC424",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "24,25,26,37,38",
+                "glecturer": "د.ماريان وجدي-م.اية-م.سمر"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "21,22,23,27,28",
+                "glecturer": "د.ماريان وجدي-م.كريم-م.عبدالهادي"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "14,15,16,47,48",
+                "glecturer": "د.اسامة فاروق-م.كريم-م.اية"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "11,12,13,34,35",
+                "glecturer": "د.اسامة فاروق-م.كريم-م.اية"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "34,35,36,24,25",
+                "glecturer": "د.رشدي-م.سمر -م.اية"
+            },
+            {
+                "gnumber": "G6",
+                "gtimes": "31,32,33,21,22",
+                "glecturer": "د.رشدي-م.سمر-م.عبدالهادي"
+            }
+        ]
+    },
+    {
+        "ccname": "هندسة البرمجيات(١)",
+        "ccode": "CSC320",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "41,42,43,27,28",
+                "glecturer": "د.سارة احمد-م.منى-د.سارة"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "31,32,33,44,45",
+                "glecturer": "د.سارة احمد-م.منى-د.سارة"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "51,52,53,24,25",
+                "glecturer": "د.سارة احمد-م.منى-د.سارة"
+            }
+        ]
+    },
+    {
+        "ccname": "نظم الحاسبات الموزعة والمتوازية",
+        "ccode": "CSC423",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "51,52,54,55",
+                "glecturer": "د.ايمن سليمان-م.كريم-م.نبيل"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "54,55,37,38",
+                "glecturer": "د.ايمن سليمان-م.كريم-م.نبيل"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "57,58,31,32",
+                "glecturer": "د.ايمن سليمان-م.ايمان-م.كريم"
+            }
+        ]
+    },
+    {
+        "ccname": "مقرر اختياري",
+        "ccode": "CSC417",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "21,22,23,57,58",
+                "glecturer": "د.سامح ظريف-م.دينا-م.شروق"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "24,25,26,21,22",
+                "glecturer": "د.سامح ظريف-م.الاء-م.شروق"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "51,52,53,34,35",
+                "glecturer": "د.ماريان-م.دينا-م.سمر"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "51,52,53,54,55",
+                "glecturer": "د.ماريان-م.الاء-م.سمر"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "54,55,56,44,45",
+                "glecturer": "د.ماريان-م.سمر"
+            }
+        ]
+    },
+    {
+        "ccname": "النظم الخبيرة",
+        "ccode": "CSC420",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "44,45,46,27,28",
+                "glecturer": "د.سماح-م.الاء-م.ايمان"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "36,37,38,54,55",
+                "glecturer": "د.سارة احمد-د.سارة-م.شيماء"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "26,27,28,44,45",
+                "glecturer": "د.رضا-م.شيماء-م.ايمان"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "23,24,25,41,42",
+                "glecturer": "د.رضا-م.ايمان-م.الاء"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "41,42,43,57,58",
+                "glecturer": "د.سماح-م.سمر-م.شيماء"
+            }
+        ]
+    },
+    {
+        "ccname": "الشبكات العصبية",
+        "ccode": "CSC426",
+        "unit": "3",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "54,55,31,32",
+                "glecturer": "د.سامح-م.شيماء-م.سمر"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "56,57,51,52",
+                "glecturer": "د.سامح-م.شيماء-م.سمر"
+            },
+            {
+                "gnumber": "G3",
+                "gtimes": "54,55,41,42",
+                "glecturer": "د.سامح-م.شيماء-م.سمر"
+            },
+            {
+                "gnumber": "G4",
+                "gtimes": "56,57,47,48",
+                "glecturer": "د.سامح-م.شيماء-م.سمر"
+            },
+            {
+                "gnumber": "G5",
+                "gtimes": "51,52,27,28",
+                "glecturer": "د.سامح-م.شيماء-م.سمر"
+            }
+        ]
+    },
+    {
+        "ccname": "مشروع",
+        "ccode": "CSC400",
+        "unit": "6",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "18",
+                "glecturer": "_"
+            },
+            {
+                "gnumber": "G2",
+                "gtimes": "28",
+                "glecturer": "_"
+            }
+        ]
+    },
+    {
+        "ccname": "لغة إنجليزية(٥)",
+        "ccode": "BSC410",
+        "unit": "1",
+        "groups": [
+            {
+                "gnumber": "G1",
+                "gtimes": "51,52,53",
+                "glecturer": "_"
+            }
+        ]
+    }
+]
