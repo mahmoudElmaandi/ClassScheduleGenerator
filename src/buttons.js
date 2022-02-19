@@ -30,23 +30,6 @@ let chooseCoursesBtnObj = {
     innerHTML: "اختيار المواد",
     onclick: selectCourses
 }
-// select all options button
-let selectAllBtnObj = {
-    id: 'selectAll',
-    style: 'display: block; margin: auto auto 5px;',
-    type: "button",
-    innerHTML: "تحديد الكل",
-    onclick: "var elements = document.getElementById('GroupSelect').options;Array.from(elements).forEach((ele)=>{if(ele.hidden==false){ele.selected = true}} )"
-}
-
-// unselect options button
-let unselectAllBtnObj = {
-    id: 'unselectAll',
-    style: 'display: block; margin: auto auto 5px;',
-    type: "button",
-    innerHTML: "إلغاء تحديد الكل",
-    onclick: "var elements = document.getElementById('GroupSelect').selectedOptions;while (elements.length > 0){   elements[0].selected = false;}"
-}
 
 // change course button
 let changeCoursesBtnObj = {
@@ -66,4 +49,4 @@ let printCombinationsBtnObj = {
     innerHTML: "اطبع الاحتمالات",
 }
 
-export { createBtn , chooseCoursesBtnObj, selectAllBtnObj, unselectAllBtnObj, changeCoursesBtnObj, printCombinationsBtnObj } 
+export { createBtn , chooseCoursesBtnObj, changeCoursesBtnObj, printCombinationsBtnObj } 
