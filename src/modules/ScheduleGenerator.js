@@ -89,6 +89,7 @@ function printCombination() {
                 document.title = 'تصفح الجداول'
             } else {
                 showCombinationsResult(" عدد الواحدات  " + totalNoUnits + "&#10;" + "وقد تخطت الحد المسموح" + " 20");
+                empty();
             }
         }
     }
