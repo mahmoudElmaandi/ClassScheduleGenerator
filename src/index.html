@@ -6,6 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Class Schedule Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
   <style>
     body {
@@ -15,6 +18,7 @@
       padding: 6px;
       margin: auto;
       font-weight: 500;
+      direction: rtl;
     }
 
     select {
@@ -84,7 +88,7 @@
     }
 
     div {
-      width: 100%;
+      /* width: 100%; */
       text-align: center
     }
 
@@ -132,14 +136,8 @@
       }
     }
 
-    div#header {
-      display: block;
-      width: auto;
-      direction: rtl
-    }
-
     p {
-      direction: ltr
+      /* direction: ltr */
     }
 
     #TestSummary {
@@ -201,7 +199,7 @@
       font-weight: bold;
     }
 
-    .active,
+    .collapsible.active,
     .collapsible:hover {
       background-color: #f1f1f1;
       color: #050505;
@@ -215,7 +213,7 @@
       margin-left: 5px;
     }
 
-    .active:after {
+    .collapsible.active:after {
       content: "\2212";
       color: black;
       font-weight: bold;
@@ -277,12 +275,13 @@
       height: 50px;
       width: 150px;
       text-align: right;
-      padding: 9px;
-      margin: 10px;
-      direction: rtl;
       font-size: 20px;
       font-family: inherit;
-      border: groove;
+      display: inline-block;
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+      color: #fff;
+      cursor: pointer;
     }
 
     #Dep option {
@@ -291,11 +290,7 @@
       padding: 41px;
       margin: 18px;
       height: 40px;
-    }
-
-    #selectdep p {
-      font-size: 20px;
-      font-weight: 400;
+      direction: rtl;
     }
 
     #ScheduleDiv {
@@ -315,9 +310,14 @@
       margin-top: 5px;
     }
 
-    #selectdep {
-      direction: rtl;
-      width: 100%
+    #upload-select-file {
+      /* direction: rtl;
+      width: 100% */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding-bottom: 15px;
     }
 
     a {
@@ -346,6 +346,7 @@
       width: 100% !important;
       float: none;
       text-align: center;
+      direction: ltr;
     }
 
     /* div#ScheduleDiv {
@@ -403,41 +404,231 @@
     #invalidMessages {
       color: red;
       font-size: 16px;
-      padding-top: 30px;
+      /* padding-top: 30px; */
+    }
+
+    /* new  */
+    .guide-nav {
+      width: auto;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    button#fileSelect {
+      font-size: 20px;
+      border-radius: 0px;
+    }
+
+    .input-group {
+      display: inline-flex;
+      width: max-content;
+    }
+
+    .input-group-text {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+      color: #fff;
+      font-size: 1.4rem;
+    }
+
+    label.input-group-text {
+      /* margin: -3px 0px; */
+    }
+
+    #tabContent {
+      border: solid #0d6efd;
+      border-top: 0px;
+      border-radius: 25px;
+    }
+
+    .nav-pills .nav-link {
+      border-right: 2px solid;
+      border-left: 2px solid;
+    }
+
+    .row.guide-tabs {
+      margin-bottom: 50px;
+    }
+
+    .nav {
+      flex-wrap: nowrap;
+    }
+
+    .item.social {
+      text-align: center
+    }
+
+    @media (max-width:991px) {
+      .item.social {
+        text-align: center;
+        margin-top: 20px
+      }
+    }
+
+    .item.social>a {
+      font-size: 40px;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      display: inline-block;
+      text-align: center;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
+      margin: 0 8px;
+      color: #41464b;
+      opacity: 0.75
+    }
+
+    .item.social>a:hover {
+      opacity: 0.9
+    }
+
+    a.fb:hover {
+      color: #3b5998;
+    }
+
+    a.wa:hover {
+      color: #4dc247;
+    }
+
+    a.tg:hover {
+      color: #229ED9;
+    }
+
+    a.dc:hover {
+      color: #5865F2;
+    }
+
+    a.gh:hover {
+      color: #171515;
+    }
+
+    .tab-content {
+      direction: rtl;
+    }
+
+    .script-instructions {
+      width: fit-content;
+    }
+
+    .badge {
+      background-color: #0d6efd;
+      margin-left: 5px;
+    }
+
+    .justify-content-between {
+      color: #0d6efd;
+    }
+
+    .files-table {
+      width: fit-content;
+    }
+
+    .jumbotron {
+      padding: 0.1rem 0.2rem;
+      margin-bottom: 2rem;
+      background-color: #0d6efd;
+      border-radius: 0.3rem;
+      color: #fff;
+      width: fit-content;
+    }
+
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    /* .title-logo {
+      margin-bottom: 0.5rem !important;
+      color: #0d6efd;
+      border: 2px solid #0d6efd;
+      width: fit-content;
+      padding: 5px;
+      border-radius: 6px;
+      border-top: 0px;
+    } */
+
+    .navbar {
+      flex-direction: column;
+    }
+
+    .tab-content>.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .select-checkboxes {
+      display: flex;
+      align-items: flex-start;
+      justify-content: start;
+      flex-direction: column;
+      padding: 5px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      max-width: fit-content;
+      max-height: 445px;
+      direction: rtl;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      cursor: pointer;
+      justify-content: start;
+      width: 100%;
+      margin: 3px;
+      padding: 5px 0px
+    }
+
+    .checkbox-input,
+    .select-all-checkbox-input {
+      margin-left: 5px;
+    }
+
+    .checkbox-label:hover {
+      background: #e5e5e5;
+      color: #000;
+    }
+
+    .checkbox-label.selected {
+      background: #340bb8;
+      color: #fff;
+      padding: 7px;
+      padding-right: 5px;
+    }
+
+    #CourseSelect,
+    #GroupSelect {
+      display: none;
+    }
+
+    #CourseSelector,
+    #GroupSelector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .select-all-checkbox {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
     }
   </style>
 </head>
 
 
 <body>
-  <div id='header'>
-    <div class="seperator"></div>
-    <p>اختر القسم لادخال المواد تلقائيا أو قم بتحميل ورفع ملف المواد<br> .ثم اختر المواد المراد تسجيلها ويمكنك اختيار
-      أكثر من مجموعة لنفس المادة <br />.لاختيار أكثر من عنصر crtl اضغط </p>
-  </div>
-  <div id="selectdep">
 
-    <select name="selectDep" id="Dep">
-      <option value="">إختر القسم </option>
-      <option value="cs">علوم حاسب</option>
-    </select>
-    <label for="selectDep"></label>
+  <form id='zero' onsubmit='return false'></form>
 
-
-    <input id='inputfile' name="sampleFile" hidden type='file' accept=".csv,.json" />
-
-
-    <!-- <input id='inputfile' hidden type='file' accept=".csv,.json" /> -->
-    <button id="fileSelect">اختر ملف المواد</button>
-
-    <div id="invalidMessages"></div>
-  </div>
-
-  <form id='zero' onsubmit='return false'>
-
-
-  </form>
   <div id='failed'></div>
+
+  <!-- Start Schedule  -->
   <div id='ScheduleDiv' style="display: none;">
     <p id="tableInfo"></p>
     <button id="printSchedule">طباعة الجدول</button>
@@ -536,7 +727,218 @@
       </tbody>
     </table>
   </div>
-  <script src="../dist/main.js"></script>
+  <!-- End Schedule  -->
+
+
+  <!-- Start home screen  -->
+  <div id="home-screen">
+
+    <div id="upload-select-file">
+      <div class="input-group">
+        <label class="input-group-text" for="upload-select-file"><i class="bi bi-menu-button"></i></label>
+
+        <select class="form-select" name="upload-select-file" id="Dep">
+          <option value=""> إختر القسم</option>
+          <option value="cs">علوم حاسب</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <input id='inputfile' name="sampleFile" hidden type='file' accept=".csv,.json" />
+        <button class="btn btn-primary btn-lg" id="fileSelect" type="button"> ارفع ملف المواد <i
+            class="bi bi-upload"></i></button>
+      </div>
+      <!-- <input id='inputfile' hidden type='file' accept=".csv,.json" /> -->
+
+      <div id="invalidMessages"></div>
+    </div>
+    <!-- Start guide-tabs  -->
+    <div class="row guide-tabs">
+      <ul class="nav nav-pills mb-3 mx-auto guide-nav" id="guideTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="script-instructions-tab" data-bs-toggle="pill"
+            data-bs-target="#content-script-instructions" type="button" role="tab"
+            aria-controls="content-script-instructions" aria-selected="false">
+            <i class="bi bi-info-square-fill"></i>
+            شرح السكربت</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="download-files-tab" data-bs-toggle="pill" data-bs-target="#content-files"
+            type="button" role="tab" aria-controls="content-files" aria-selected="false">
+            <i class="bi bi-file-text-fill"></i>
+            ملفات مواد الأقسام</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="file-instructions-tab" data-bs-toggle="pill"
+            data-bs-target="#content-file-instructions" type="button" role="tab"
+            aria-controls="content-file-instructions" aria-selected="false">
+            <i class="bi bi-bricks"></i>
+            شرح إنشاء ملف المواد</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="tabContent">
+        <div class="tab-pane fade active show" id="content-script-instructions" role="tabpanel"
+          aria-labelledby="script-instructions-tab">
+
+          <div class="list-group script-instructions">
+            <a class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><span class="badge badge-light">1</span>ادخال ملف المواد</h5>
+              </div>
+              <p class="mb-1">يمكنك اختيار القسم لادخال ملف المواد تلقائيا أو يمكنك رفع ملف مواد خاص بك ويلي ذلك ظهور
+                قائمة اختيار المواد
+              </p>
+            </a>
+
+            <a class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><span class="badge badge-light">2</span>اختيار المواد</h5>
+              </div>
+              <p class="mb-1">اختر المواد المراد تسجيلها سواء كلها أو بعضها ويلي ذلك ظهور قائمة اختيار المجموعات</p>
+            </a>
+
+            <a class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><span class="badge badge-light">3</span>اختيار المجموعات</h5>
+              </div>
+              <p class="mb-1">اختر المجموعات كلها أو بعضها حسب المحاضرين والمعيدين</p>
+            </a>
+            <a class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><span class="badge badge-light">4</span>طباعة الاحتمالات وتصفح الجداول</h5>
+              </div>
+              <p class="mb-1"> تظهر الاحتمالات الناجحة لتسجيل المواد على صورة جدول دراسي وصورة نصية.
+                <br>
+                يمكن التنقل بين الجداول وفلترتها حسب عدد أيام الحضور.
+              </p>
+            </a>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="content-files" role="tabpanel" aria-labelledby="download-files-tab">
+          <table class="table table-hover files-table mx-auto">
+            <thead>
+              <tr>
+                <th scope="col">القسم</th>
+                <th scope="col">الترم</th>
+                <th scope="col">آخر تحديث للملف</th>
+                <th scope="col">تحميل</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">علوم حاسب</th>
+                <td>يناير-مايو</td>
+                <td>30-1-2022</td>
+                <td><a href="https://bit.ly/cs-1-2-3-4-30-1-2022" target="_blank"><i class="bi bi-download"></i></a>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">هندسة</th>
+                <td>يناير-مايو</td>
+                <td>30-1-2022</td>
+                <td><i class="bi bi-download"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane fade" id="content-file-instructions" role="tabpanel"
+          aria-labelledby="file-instructions-tab">
+
+          <p>فيديو يوضح كيفية قيام الطالب بمفرده بعمل ملف مواد خاص به،
+            <br>
+            ثم تجربته على السكربت لإنشاء الجداول الممكنة لتسجيل هذه المواد،
+            <br>
+            ثم اختيار الجدول المناسب والتأكد من صحته
+          </p>
+
+          <div>
+            <a href="https://www.youtube.com/watch?v=tRuwgX6EQ4w" target="_blank">
+              رابط الفيديو
+              <i class="bi bi-youtube"></i>
+            </a>
+            <br>
+            <a href="https://github.com/AlMoaanediLabs/PathFinderGuide#%D9%83%D9%8A%D9%81%D9%8A%D8%A9-%D8%B9%D9%85%D9%84-%D9%85%D9%84%D9%81-%D8%A7%D9%84%D9%85%D9%88%D8%A7%D8%AF"
+              target="_blank">
+              رابط شرح الخطوات على GitHub
+              <i class="bi bi-github"></i>
+            </a>
+            <br>
+            <a href="https://reginput.blogspot.com" target="_blank">
+              رابط فورم إنشاء ملف المواد
+              <i class="bi bi-input-cursor"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End switch nav  -->
+
+
+    <script>
+      document.querySelectorAll('.nav-link').forEach(button => {
+        button.addEventListener('click', showTabContent)
+      });
+
+      function showTabContent(e) {
+        // Enabling the target nav link
+        let targetNavLink = e.currentTarget
+        targetNavLink.classList.add('active')
+        targetNavLink.setAttribute('aria-selected', true)
+
+        // console.log('targetNavLink.id', targetNavLink.id)
+
+        // Disabling other nav links
+        document.querySelectorAll('.nav-link')
+          .forEach(btn => {
+            if (btn.id != targetNavLink.id) {
+              // console.log('disabled : ', btn.id)
+              btn.classList.remove('active')
+              btn.setAttribute('aria-selected', false)
+            }
+          })
+
+        // Showing the target content
+        let ariaControls = targetNavLink.getAttribute('aria-controls')
+        // console.log('ariaControls', ariaControls)
+        let targetContent = document.querySelector(`#${ariaControls}`)
+        targetContent.classList.add('active', 'show')
+        targetContent.style.display = "flex"
+
+        console.log('targetContent', targetContent)
+
+        // Hiding other content
+        document.querySelectorAll('.tab-pane')
+          .forEach(content => {
+            if (content.id != targetContent.id) {
+              console.log('hidden : ', content.id)
+              content.classList.remove('active', 'show')
+              content.style.display = "none"
+            }
+          })
+      }
+    </script>
+
+    <!-- Start Footer  -->
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="https://static.wikia.nocookie.net/apexlegends_gamepedia_en/images/7/7c/Recon.svg" width="30"
+          height="30" class="d-inline-block align-top" alt="">
+        سكربت الجداول PathFinder
+      </a>
+      <div class="col item social">
+        <a href="#" class="fb"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="wa"><i class="bi bi-whatsapp"></i></a>
+        <a href="#" class="tg"><i class="bi bi-telegram"></i></a>
+        <a href="#" class="dc"><i class="bi bi-discord"></i></a>
+        <a href="#" class="gh"><i class="bi bi-github"></i></a>
+      </div>
+    </nav>
+    <!-- End Footer  -->
+
+  </div>
+  <!-- End home screen  -->
+
+  <script src="./main.js"></script>
 </body>
 
 </html>
