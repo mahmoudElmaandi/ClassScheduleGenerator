@@ -25,18 +25,13 @@
 - فلترة الاحتمالات الناجحة حسب عدد أيام الحضور.
 
 
-## تشغيل الأداة
+## للمساهمة في تطوير الأداة
 أولا تأكد من تثبيت  [Node.js](https://nodejs.org/en/download)
   
 ثم قم بتحميل المشروع أو نسخه
 
 ```bash
   git clone https://github.com/AlMoaanediLabs/ClassScheduleGenerator
-```
-
-توجه لمكان المشروع
-
-```bash
   cd my-project
 ```
 
