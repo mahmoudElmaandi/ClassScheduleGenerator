@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --experimental-modules --es-module-specifier-resolution=node ./src/tests/test-unit.js",
-    "build": "webpack --config webpack.config.cjs"
+    "build": "webpack --config webpack.config.cjs",
+    "live": "node live-server.cjs"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
+    "live-server": "^1.2.1",
     "csv-file-validator": "^1.13.1"
   }
 }
