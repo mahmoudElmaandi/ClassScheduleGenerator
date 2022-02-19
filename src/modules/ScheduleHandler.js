@@ -48,6 +48,7 @@ function getScheduleInfo(ScheduleGroupsindexes) {
     return { ScheduleTextFormat, ScheduleTimes }
 }
 
+// TODO: Remove duplicate code
 function travelsSchedules(e) {
     const travelsingBtn = e.target
     var tableSelect = document.getElementsByClassName(travelsingBtn.id)[0];
