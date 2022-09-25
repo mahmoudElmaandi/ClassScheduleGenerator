@@ -43,8 +43,9 @@ function printCombination() {
     }
 
     // make sure that more than one course is selected
-    if (selectedGroups.length <= 1) {
-        window.alert("يرجى اختيار مادتين مختلفتين على الأقل");
+    //make sure atleast one group is selected
+    if (selectedGroups.length == 0) {
+        window.alert("يرجى اختيار مجموعة واحدة على الأقل");
         empty()
     }
     else {
@@ -71,7 +72,7 @@ function printCombination() {
             }
         })
 
-        if (coursesCodeMap.size == 1) {
+        if (coursesCodeMap.size == 0) {
             window.alert("يرجى اختيار مادتين مختلفتين على الأقل");
             empty()
         }

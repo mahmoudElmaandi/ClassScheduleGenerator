@@ -6,8 +6,8 @@ module.exports = {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
     },
-    // mode: 'production',
-    mode: 'development',
+    mode: 'production',
+    // mode: 'development',
     watch: true,
     // module: {
     //     rules: [

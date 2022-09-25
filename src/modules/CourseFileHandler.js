@@ -67,9 +67,9 @@ DepOptionts.addEventListener('change', selectDepartment);
 
 function selectDepartment(e) {
     if (DepOptionts.options[DepOptionts.selectedIndex].value == "cs") {
-        parseFile(csvToJSONObject(coursesInfo))
+        parseFile(csvToJSONObject(window.coursesInfo))
     }
-}
+};
 
 // Parsing Courses File to populate these Lists
 let courseList = [] // used to create courses select element UI @createCourseSelect()
@@ -209,7 +209,7 @@ function createGroupSelect(groupList) {
         GroupSelect.appendChild(option);
 
         // Create crossponding checkbox for each option
-        const label = createLabelCheckboxElement(name, index, 'group')
+        const label = createLabelCheckboxElement(name + ' ' + dr, index, 'group')
         checkboxes.appendChild(label)
     }
     // Create select all label 
@@ -279,10 +279,10 @@ function createSelectAllCheckboxElement(text, type) {
 
 function selectAll(type) {
     console.log('clicked')
-    console.log('type',type)
+    console.log('type', type)
     let checkboxes = Array.from(document.querySelectorAll(`#${type}-checkboxes input`));
     const selectAllCheckbox = document.querySelector(`#${type}-selectall`)
-    console.log('checkboxes',checkboxes)
+    console.log('checkboxes', checkboxes)
     checkboxes.forEach((checkbox) => {
         if (checkbox.parentElement.hidden == false) {
 
