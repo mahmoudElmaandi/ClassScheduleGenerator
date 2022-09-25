@@ -6,18 +6,21 @@ function selectCourses() {
     var GroupOptions = document.getElementById("GroupSelect").options;
     let GroupCheckboxes = Array.from(document.querySelectorAll('#group-checkboxes input'))
 
-    if (SlelectedCourses.length <= 1) {
+    // remove limit
+    if (SlelectedCourses.length <= 0) {
        // TODO: change alert to a more user friendly way. 
         window.alert("يرجى اختيار مادتين على الأقل");
     } else {
+
 
         // Unselect and Hide all group options
         for (let i = 0; i < GroupOptions.length; i++) {
             GroupOptions[i].hidden = true;
             GroupOptions[i].selected = false;
             
-            // Hide all group checkbox
+            // Hide and uncheck all group checkbox
             GroupCheckboxes[i].parentElement.hidden = true;
+            GroupCheckboxes[i].parentElement.classList.remove('selected');
             GroupCheckboxes[i].checked = false;
         }
 
@@ -30,11 +33,14 @@ function selectCourses() {
                 GroupOptions[groupIndex].hidden = false;
                 GroupOptions[groupIndex].selected = false;
                 
-                // Hide corresponding checkbox
+                // show groups of sekected courses
                 GroupCheckboxes[groupIndex].parentElement.hidden = false;
                 GroupCheckboxes[groupIndex].checked = false;
             })
         }
+        // uncheck group-selectall
+        document.getElementById('group-selectall').checked = false;
+
         CreateGroupUI()
     }
     window.scrollBy(0, 120);
