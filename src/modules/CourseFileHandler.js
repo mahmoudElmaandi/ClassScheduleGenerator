@@ -21,10 +21,13 @@ function readFile() {
     const uploadedFile = this.files[0];
 
     if (validitaFileType(uploadedFile)) {
+        console.log(uploadedFile)
         var reader = new FileReader();
         reader.readAsText(uploadedFile);
         reader.onload = function (e) { handelFile(e.target.result, uploadedFile.type); }
     } else {
+        console.log(uploadedFile)
+
         console.log('Not a Valid type')
     }
 }
@@ -57,6 +60,7 @@ function validitaFileType(file) {
         "text/plain",
         "application/vnd.ms-excel",
         "application/json",
+        "text/csv"
     ];
     return fileTypes.includes(file.type);
 }
@@ -66,8 +70,9 @@ let DepOptionts = document.getElementById('Dep');
 DepOptionts.addEventListener('change', selectDepartment);
 
 function selectDepartment(e) {
-    if (DepOptionts.options[DepOptionts.selectedIndex].value == "cs") {
-        parseFile(csvToJSONObject(window.coursesInfo))
+    const optionValue = DepOptionts.options[DepOptionts.selectedIndex].value
+    if (validDepValues.includes(optionValue)) {
+        parseFile(csvToJSONObject(window.coursesInfo[optionValue]))
     }
 };
 

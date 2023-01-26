@@ -1,4 +1,4 @@
-import { drawSchedule, createButtonsofAttandanceMap, enableTravelse , travelsSchedules } from './ScheduleHandler.js'
+import { drawSchedule, createButtonsofAttandanceMap, enableTravelse, travelsSchedules } from './ScheduleHandler.js'
 
 function printCombination() {
     failedTestDiv.innerHTML = "";
@@ -81,16 +81,23 @@ function printCombination() {
             printCombination.disabled = true;
             printCombination.innerHTML = " ..... جاري طباعة الاحتمالات"
 
-            // Check number of units
-            if (totalNoUnits <= unitLimit) {
+            function proceed() {
                 setTimeout(() => {
                     checkNoCombinations();
                     empty();
                 }, 20);
                 document.title = 'تصفح الجداول'
+            }
+
+            // Check number of units
+            if (document.querySelector("#isFailingStu").checked) {
+                proceed()
             } else {
-                showCombinationsResult(" عدد الواحدات  " + totalNoUnits + "&#10;" + "وقد تخطت الحد المسموح" + " 20");
-                empty()
+                if (totalNoUnits <= unitLimit) proceed()
+                else {
+                    showCombinationsResult(" عدد الواحدات  " + totalNoUnits + "&#10;" + "وقد تخطت الحد المسموح" + " 20");
+                    empty()
+                }
             }
         }
     }
@@ -322,7 +329,7 @@ function createCombinationTestUI() {
             enableTravelse(event.target.className)
         })
 
-        
+
 
         for (var i = 0; i < nooverlapcombintion.length; i++) {
             let indexselect = i + 1
@@ -355,14 +362,14 @@ function createCombinationTestUI() {
         previous.setAttribute('class', 'previous');
         previous.addEventListener('click', travelsSchedules);
         previous.innerHTML = '&#10094;';
-        
+
         var next = document.createElement('button');
         next.setAttribute("type", "button");
         next.setAttribute('id', "TableSelectT" + selectTableNum);
         next.setAttribute('class', 'next');
         next.addEventListener('click', travelsSchedules);
         next.innerHTML = '&#10095;';
-        
+
         CombinationResultContainer.appendChild(previous);
         CombinationResultContainer.appendChild(tableSelect);
         CombinationResultContainer.appendChild(next);

@@ -15,34 +15,71 @@ window.CombinationLimit = 16e+7; // in decimal form 160000000
 window.unitLimit = 20
 
 // get coursesInfo file online
-const fetchCoursesInfoFile = async () => {
-    const response = await fetch(`https://calm-gray-yak-toga.cyclic.app/latest-courses-file`);
-    // const response = await fetch(`http://localhost:5000/latest-courses-file`);
+const fetchCoursesInfoFile = async (filter = "cs") => {
+    const response = await fetch(`https://calm-gray-yak-toga.cyclic.app/latest-courses-file?filter=${filter}`);
+    // const response = await fetch(`http://localhost:5000/latest-courses-file?filter=${filter}`);
     return await response.json();
 };
 
 (async () => {
-    // window.coursesInfo = 
-    const { name, content, description, department, term, createdAt } = await fetchCoursesInfoFile();
-    if (content) {
-        document.querySelector('.form-select').disabled = false;
-        window.coursesInfo = content;
-        document.querySelector('#header-note').innerHTML = description;
+    // window.coursesInfo =
+    document.querySelector("#invalidMessages").innerHTML += ` <div class="form-check">
+    <input class="form-check-input" type="checkbox" style="float: none;margin: 0px;" value="" id="isFailingStu">
+    <label class="form-check-label" for="flexCheckDefault">
+     هل أنت طالب متعثر؟ قم بالتحديد لإلغاء حد الـ 20 وحدة
+    </label>
+    </div>`
+    window.coursesInfo = {};
+    window.validDepValues = [];
 
-        document.querySelector('#files-sec').innerHTML = ` 
+    const filesSec = document.querySelector('#files-sec');
+    const depSelect = document.querySelector('.form-select');
+    depSelect.disabled = true;
+
+    const depFilterNames = {
+        "cs": "علوم حاسب لائحة قديمة",
+        "new-cs": "علوم حاسب لائحة جديدة"
+    };
+
+    function pushDepFileContent(csFile) {
+        const { content, description, filter } = csFile;
+        if (!content) return
+        window.coursesInfo[filter] = content;
+        window.validDepValues.push(filter)
+        if (description) document.querySelector('#header-note').innerHTML += `${depFilterNames[filter]} :  ${description} <br>`;
+        fillInFileSec(csFile)
+    };
+
+    const oldCsFile = await fetchCoursesInfoFile()
+    pushDepFileContent(oldCsFile);
+
+    const newCSFile = await fetchCoursesInfoFile("new-cs");
+    let { content: newCsContent } = newCSFile;
+    if (newCsContent) {
+        pushDepFileContent(newCSFile)
+        depSelect.appendChild(createOption(newCSFile));
+    }
+
+    depSelect.disabled = false;
+
+    function fillInFileSec({ name, content, department, term, createdAt }) {
+        filesSec.innerHTML += ` 
         <tr  >
-        <th scope="row">${department} </th>
-        <td>${term}</td>
-        <td>${new Date(createdAt).toLocaleString()}</td>
-        <td><button onclick="window.downloadCSV(this)" name="${name}" content= "${content}">  <i class="bi bi-download"></i></button>
-        </td>
+         <th scope="row">${department} </th>
+         <td>${term}</td>
+         <td>${new Date(createdAt).toLocaleString()}</td>
+         <td><button onclick="window.downloadCSV(this)" name="${name}" content= "${content}">  <i class="bi bi-download"></i></button>
+         </td>
         </tr>
-        `
-    }
-    if (!content) {
-        document.querySelector('.form-select').disabled = true;
-        document.querySelector('#files-sec').innerHTML = `لا توجد ملفات`
-    }
+       `
+    };
+
+    function createOption({ department, filter }) {
+        const option = document.createElement('option')
+        option.innerHTML = department;
+        option.value = filter
+        return option
+    };
 })();
 
 window.codesmap = new Map()

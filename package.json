@@ -18,9 +18,7 @@
     "mocha": "^9.1.3",
     "style-loader": "^3.2.1",
     "webpack": "^5.51.1",
-    "webpack-cli": "^4.8.0"
-  },
-  "dependencies": {
+    "webpack-cli": "^4.8.0",
     "live-server": "^1.2.1",
     "csv-file-validator": "^1.13.1"
   }
