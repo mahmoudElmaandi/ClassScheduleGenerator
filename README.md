@@ -26,7 +26,7 @@
 
 
 ## للمساهمة في تطوير الأداة
-أولا تأكد من تثبيت  [Node.js](https://nodejs.org/en/download)
+أولا تأكد من تثبيت  [Node.js v16.16.0](https://nodejs.org/en/blog/release/v16.16.0/)
   
 ثم قم بتحميل المشروع أو نسخه
 
