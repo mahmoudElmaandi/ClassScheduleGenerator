@@ -1,4 +1,3 @@
-const webpack = require("webpack");
 const path = require('path')
 module.exports = {
     entry: './src/index.js',
@@ -9,12 +8,4 @@ module.exports = {
     mode: 'production',
     // mode: 'development',
     watch: true,
-    // module: {
-    //     rules: [
-    //         {
-    //             test: /\.css$/,
-    //             use: ['style-loader', 'css-loader']
-    //         },
-    //     ],
-    // }
 };
