@@ -4,6 +4,7 @@ import './modules/ScheduleGenerator.js'
 
 // import "./style.css"
 import { setPrintUI, printSchedule } from './modules/ScheduleHandler.js';
+import { createOption, fillInFileSec, getArabicADString } from './utils.js';
 
 // TODO: improve UI design
 window.form = document.getElementById("zero");
@@ -21,6 +22,11 @@ const fetchCoursesInfoFile = async (filter = "cs") => {
     return await response.json();
 };
 
+const fetchCourseFiles = async () => {
+    const response = await fetch(`https://calm-gray-yak-toga.cyclic.app/courses-files`);
+    return await response.json();
+};
+
 (async () => {
     // window.coursesInfo =
     document.querySelector("#invalidMessages").innerHTML += ` <div class="form-check">
@@ -32,54 +38,24 @@ const fetchCoursesInfoFile = async (filter = "cs") => {
     window.coursesInfo = {};
     window.validDepValues = [];
 
-    const filesSec = document.querySelector('#files-sec');
     const depSelect = document.querySelector('.form-select');
     depSelect.disabled = true;
 
-    const depFilterNames = {
-        "cs": "علوم حاسب لائحة قديمة",
-        "new-cs": "علوم حاسب لائحة جديدة"
-    };
-
-    function pushDepFileContent(csFile) {
-        const { content, description, filter } = csFile;
+    function pushDepFileContent(courseFile) {
+        const { content, description, index: fileIndex, department, createdAt } = courseFile;
         if (!content) return
-        window.coursesInfo[filter] = content;
-        window.validDepValues.push(filter)
-        if (description) document.querySelector('#header-note').innerHTML += `${depFilterNames[filter]} :  ${description} <br>`;
-        fillInFileSec(csFile)
+        window.coursesInfo[fileIndex] = content;
+        window.validDepValues.push(fileIndex)
+        if (description) document.querySelector('#header-note').innerHTML += `${getArabicADString(createdAt)} [[ ${department} :  ${description} ]] <br>`;
+        fillInFileSec(courseFile)
     };
-
-    const oldCsFile = await fetchCoursesInfoFile()
-    pushDepFileContent(oldCsFile);
-
-    const newCSFile = await fetchCoursesInfoFile("new-cs");
-    let { content: newCsContent } = newCSFile;
-    if (newCsContent) {
-        pushDepFileContent(newCSFile)
-        depSelect.appendChild(createOption(newCSFile));
-    }
-
+    const files = await fetchCourseFiles();
+    files.forEach((file, index) => {
+        file["index"] = index.toString();
+        pushDepFileContent(file)
+        depSelect.appendChild(createOption(file));
+    });
     depSelect.disabled = false;
-
-    function fillInFileSec({ name, content, department, term, createdAt }) {
-        filesSec.innerHTML += ` 
-        <tr  >
-         <th scope="row">${department} </th>
-         <td>${term}</td>
-         <td>${new Date(createdAt).toLocaleString()}</td>
-         <td><button onclick="window.downloadCSV(this)" name="${name}" content= "${content}">  <i class="bi bi-download"></i></button>
-         </td>
-        </tr>
-       `
-    };
-
-    function createOption({ department, filter }) {
-        const option = document.createElement('option')
-        option.innerHTML = department;
-        option.value = filter
-        return option
-    };
 })();
 
 window.codesmap = new Map()
