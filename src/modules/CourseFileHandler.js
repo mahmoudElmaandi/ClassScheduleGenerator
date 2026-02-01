@@ -1,10 +1,49 @@
 import { createBtn, chooseCoursesBtnObj, printCombinationsBtnObj } from '../buttons.js'
 import { csvToJSONObject } from '../csv-to-json.js'
 import { printCombination } from './ScheduleGenerator.js'
+import { selectCourses } from './CourseSelectHandler.js'
 
 
 const inputfile = document.getElementById("inputfile")
 const fileSelectBtn = document.querySelector('#fileSelect')
+
+const STORAGE_KEYS = {
+    selectedCourses: 'csgen_selected_courses',
+    selectedGroups: 'csgen_selected_groups',
+    selectedDep: 'csgen_selected_dep'
+}
+
+function safeGetItem(key) {
+    try {
+        return localStorage.getItem(key)
+    } catch (error) {
+        return null
+    }
+}
+
+function safeSetItem(key, value) {
+    try {
+        localStorage.setItem(key, value)
+    } catch (error) {
+        return null
+    }
+}
+
+function safeRemoveItem(key) {
+    try {
+        localStorage.removeItem(key)
+    } catch (error) {
+        return null
+    }
+}
+
+function safeParseJSON(value, fallback) {
+    try {
+        return JSON.parse(value)
+    } catch (error) {
+        return fallback
+    }
+}
 
 
 inputfile.addEventListener("change", readFile, false);
@@ -72,6 +111,7 @@ DepOptionts.addEventListener('change', selectDepartment);
 function selectDepartment(e) {
     const optionValue = DepOptionts.options[DepOptionts.selectedIndex].value
     if (validDepValues.includes(optionValue)) {
+        safeSetItem(STORAGE_KEYS.selectedDep, optionValue)
         parseFile(csvToJSONObject(window.coursesInfo[optionValue]))
     }
 };
@@ -117,6 +157,132 @@ function parseFile(coursesDataList) {
     CreateSelectCourseUI()
 }
 
+function persistSelections() {
+    const courseSelect = document.getElementById("CourseSelect")
+    const groupSelect = document.getElementById("GroupSelect")
+
+    if (courseSelect) {
+        const selectedCourses = Array.from(courseSelect.selectedOptions).map(option => option.value)
+        safeSetItem(STORAGE_KEYS.selectedCourses, JSON.stringify(selectedCourses))
+    }
+
+    if (groupSelect) {
+        const selectedGroups = Array.from(groupSelect.selectedOptions)
+            .map(option => option.getAttribute('regCode'))
+            .filter(Boolean)
+        safeSetItem(STORAGE_KEYS.selectedGroups, JSON.stringify(selectedGroups))
+    }
+}
+
+function updateCourseSummary() {
+    const summaryDiv = document.getElementById('courseSelectionSummary')
+    const courseSelect = document.getElementById("CourseSelect")
+    if (!summaryDiv || !courseSelect) return
+    const selectedCourses = Array.from(courseSelect.selectedOptions)
+    summaryDiv.innerHTML = `عدد المواد المختارة: ${selectedCourses.length}`
+}
+
+function updateSelectionSummary() {
+    const summaryDiv = document.getElementById('selectionSummary')
+    const groupSelect = document.getElementById("GroupSelect")
+    if (!summaryDiv || !groupSelect) return
+
+    const selectedGroups = Array.from(groupSelect.selectedOptions)
+    let courseUnits = new Map()
+    let courseCounts = new Map()
+
+    selectedGroups.forEach(option => {
+        const code = option.value
+        const unit = parseInt(option.getAttribute('unit') || '0', 10)
+        courseUnits.set(code, unit)
+        courseCounts.set(code, (courseCounts.get(code) || 0) + 1)
+    })
+
+    const totalUnits = Array.from(courseUnits.values()).reduce((total, unit) => total + unit, 0)
+    const duplicates = Array.from(courseCounts.entries())
+        .filter(([_, count]) => count > 1)
+        .map(([code, count]) => `${code} (${count})`)
+
+    const duplicatesText = duplicates.length ? `تكرار المادة: ${duplicates.join('، ')}` : 'لا يوجد تكرار'
+    summaryDiv.innerHTML = `عدد المواد المختارة: ${courseUnits.size} | عدد المجموعات المختارة: ${selectedGroups.length} | مجموع الوحدات: ${totalUnits}<br>${duplicatesText}`
+}
+
+function applyGroupSelections(savedGroupRegCodes) {
+    const groupSelect = document.getElementById("GroupSelect")
+    if (!groupSelect) return
+    const savedSet = new Set(savedGroupRegCodes)
+    const groupOptions = Array.from(groupSelect.options)
+    const groupCheckboxes = Array.from(document.querySelectorAll('#group-checkboxes input'))
+
+    groupOptions.forEach((option, index) => {
+        const regCode = option.getAttribute('regCode')
+        const shouldSelect = savedSet.has(regCode)
+        option.selected = shouldSelect
+        if (groupCheckboxes[index]) {
+            groupCheckboxes[index].checked = shouldSelect
+            if (shouldSelect) {
+                groupCheckboxes[index].parentElement.classList.add('selected')
+            } else {
+                groupCheckboxes[index].parentElement.classList.remove('selected')
+            }
+        }
+    })
+    updateSelectionSummary()
+}
+
+function restoreSelections() {
+    const savedCourses = safeParseJSON(safeGetItem(STORAGE_KEYS.selectedCourses), [])
+    if (!Array.isArray(savedCourses) || savedCourses.length == 0) {
+        updateCourseSummary()
+        updateSelectionSummary()
+        return
+    }
+
+    const courseSelect = document.getElementById("CourseSelect")
+    if (!courseSelect) return
+
+    const courseOptions = Array.from(courseSelect.options)
+    const courseCheckboxes = Array.from(document.querySelectorAll('#course-checkboxes input'))
+    courseOptions.forEach((option, index) => {
+        if (savedCourses.includes(option.value)) {
+            option.selected = true
+            if (courseCheckboxes[index]) {
+                courseCheckboxes[index].checked = true
+                courseCheckboxes[index].parentElement.classList.add('selected')
+            }
+        }
+    })
+
+    updateCourseSummary()
+    selectCourses()
+
+    const savedGroups = safeParseJSON(safeGetItem(STORAGE_KEYS.selectedGroups), [])
+    if (Array.isArray(savedGroups) && savedGroups.length > 0) {
+        applyGroupSelections(savedGroups)
+    } else {
+        updateSelectionSummary()
+    }
+}
+
+function clearSavedSelections() {
+    safeRemoveItem(STORAGE_KEYS.selectedCourses)
+    safeRemoveItem(STORAGE_KEYS.selectedGroups)
+    safeRemoveItem(STORAGE_KEYS.selectedDep)
+    window.alert("تم مسح الاختيارات المحفوظة")
+}
+
+function setupSearchFilter(inputElement, labelSelector) {
+    if (!inputElement) return
+    inputElement.addEventListener('input', () => {
+        const query = inputElement.value.trim()
+        const labels = Array.from(document.querySelectorAll(labelSelector))
+        labels.forEach(label => {
+            const text = label.innerText || ''
+            label.hidden = query.length > 0 && !text.includes(query)
+        })
+    })
+}
+
 // Create crossponding checkboxes for select options
 function createLabelCheckboxElement(text, index, type) {
     let label = document.createElement("label");
@@ -139,6 +305,10 @@ function createCourseSelect(courseList) {
     var CourseSelect = document.createElement("select");
     CourseSelect.setAttribute("multiple", "true");
     CourseSelect.id = "CourseSelect";
+    CourseSelect.addEventListener('change', () => {
+        persistSelections()
+        updateCourseSummary()
+    })
 
     // Create crossponding checkboxes div
     var checkboxes = document.createElement("div");
@@ -162,8 +332,22 @@ function createCourseSelect(courseList) {
     // Create select all label 
     const selectAllLabel = createSelectAllCheckboxElement('تحديد كل المواد', 'course')
 
+    const courseSearch = document.createElement('input')
+    courseSearch.setAttribute('type', 'text')
+    courseSearch.setAttribute('id', 'courseSearchInput')
+    courseSearch.setAttribute('placeholder', 'ابحث عن مادة')
+    courseSearch.style.margin = '6px'
+    courseSearch.style.width = '60%'
+    setupSearchFilter(courseSearch, '#course-checkboxes label')
+
+    const courseSummary = document.createElement('div')
+    courseSummary.setAttribute('id', 'courseSelectionSummary')
+    courseSummary.style.margin = '6px'
+
     CourseDiv.appendChild(CourseSelect);
     CourseDiv.appendChild(selectAllLabel);
+    CourseDiv.appendChild(courseSearch);
+    CourseDiv.appendChild(courseSummary);
     CourseDiv.appendChild(checkboxes);
 
 }
@@ -187,12 +371,19 @@ function handleCorrespondingOptionOfCheckbox(target) {
         target.parentElement.classList.remove('selected')
 
     }
+    persistSelections()
+    updateCourseSummary()
+    updateSelectionSummary()
 }
 
 function createGroupSelect(groupList) {
     var GroupSelect = document.createElement("select");
     GroupSelect.id = "GroupSelect";
     GroupSelect.setAttribute("multiple", "true");
+    GroupSelect.addEventListener('change', () => {
+        persistSelections()
+        updateSelectionSummary()
+    })
 
     // Create crossponding checkboxes div
     var checkboxes = document.createElement("div");
@@ -220,8 +411,22 @@ function createGroupSelect(groupList) {
     // Create select all label 
     const selectAllLabel = createSelectAllCheckboxElement('تحديد كل المجموعات', 'group')
 
+    const groupSearch = document.createElement('input')
+    groupSearch.setAttribute('type', 'text')
+    groupSearch.setAttribute('id', 'groupSearchInput')
+    groupSearch.setAttribute('placeholder', 'ابحث عن مجموعة أو دكتور')
+    groupSearch.style.margin = '6px'
+    groupSearch.style.width = '60%'
+    setupSearchFilter(groupSearch, '#group-checkboxes label')
+
+    const selectionSummary = document.createElement('div')
+    selectionSummary.setAttribute('id', 'selectionSummary')
+    selectionSummary.style.margin = '6px'
+
     GroupDiv.appendChild(GroupSelect);
     GroupDiv.appendChild(selectAllLabel);
+    GroupDiv.appendChild(groupSearch);
+    GroupDiv.appendChild(selectionSummary);
     GroupDiv.appendChild(checkboxes);
 }
 
@@ -234,11 +439,17 @@ function CreateSelectCourseUI() {
 
     // Choose course button
     let chooseCoursesBtn = createBtn(chooseCoursesBtnObj)
+    let clearSavedBtn = document.createElement('button')
+    clearSavedBtn.type = 'button'
+    clearSavedBtn.setAttribute('id', 'clearSavedSelections')
+    clearSavedBtn.innerHTML = 'مسح الاختيارات المحفوظة'
+    clearSavedBtn.addEventListener('click', clearSavedSelections)
 
     // Create Course Select
     createCourseSelect(courseList)
 
     CourseDiv.appendChild(chooseCoursesBtn);
+    CourseDiv.appendChild(clearSavedBtn);
     GroupDiv.appendChild(HeaderD);
 
     // Create Group Select
@@ -263,6 +474,9 @@ function CreateSelectCourseUI() {
     // window.scrollBy(0, 250);
     form.addEventListener("submit", printCombination);
     document.title = 'اختيار المواد'
+    updateCourseSummary()
+    updateSelectionSummary()
+    restoreSelections()
 }
 
 function createSelectAllCheckboxElement(text, type) {

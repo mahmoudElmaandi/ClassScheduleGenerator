@@ -56,6 +56,16 @@ const fetchCourseFiles = async () => {
         depSelect.appendChild(createOption(file));
     });
     depSelect.disabled = false;
+
+    try {
+        const savedDep = localStorage.getItem('csgen_selected_dep')
+        if (savedDep && window.validDepValues.includes(savedDep)) {
+            depSelect.value = savedDep
+            depSelect.dispatchEvent(new Event('change'))
+        }
+    } catch (error) {
+        // ignore storage errors
+    }
 })();
 
 window.codesmap = new Map()
@@ -70,6 +80,7 @@ window.HeaderD = document.createElement("div")
 window.tableInfo = document.getElementById('tableInfo')
 window.failedTestDiv = document.getElementById('failed')
 window.attendanceDaysMap = new Map()
+window.offDaysMap = new Map()
 
 window.totalNoUnits = 0
 window.coursesTimes = []
@@ -90,6 +101,54 @@ for (let index = 0; index < document.getElementsByClassName("celly").length; ind
 const printBTN = document.querySelector('#printSchedule')
 printBTN.addEventListener("click", printSchedule)
 setPrintUI()
+
+async function loadHtml2Canvas() {
+    if (window.html2canvas) return
+    await new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'
+        script.onload = resolve
+        script.onerror = reject
+        document.head.appendChild(script)
+    })
+}
+
+async function exportScheduleAsImage() {
+    const scheduleTable = document.querySelector('#Schedule')
+    if (!scheduleTable) return
+    try {
+        await loadHtml2Canvas()
+        const canvas = await window.html2canvas(scheduleTable)
+        const link = document.createElement('a')
+        link.download = 'schedule.png'
+        link.href = canvas.toDataURL('image/png')
+        link.click()
+    } catch (error) {
+        window.alert('تعذر تصدير الصورة')
+    }
+}
+
+function addExportButtons() {
+    const scheduleDiv = document.querySelector('#ScheduleDiv')
+    if (!scheduleDiv) return
+
+    const exportImageBtn = document.createElement('button')
+    exportImageBtn.type = 'button'
+    exportImageBtn.setAttribute('id', 'exportScheduleImage')
+    exportImageBtn.innerHTML = 'تحميل صورة'
+    exportImageBtn.addEventListener('click', exportScheduleAsImage)
+
+    const exportPdfBtn = document.createElement('button')
+    exportPdfBtn.type = 'button'
+    exportPdfBtn.setAttribute('id', 'exportSchedulePDF')
+    exportPdfBtn.innerHTML = 'حفظ PDF'
+    exportPdfBtn.addEventListener('click', () => window.print())
+
+    printBTN.insertAdjacentElement('afterend', exportImageBtn)
+    exportImageBtn.insertAdjacentElement('afterend', exportPdfBtn)
+}
+
+addExportButtons()
 
 window.downloadCSV = function downloadCSV(target) {
     console.log(target);

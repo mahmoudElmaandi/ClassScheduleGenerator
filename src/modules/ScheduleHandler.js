@@ -1,13 +1,54 @@
 import { getNoAttendanceDays } from './ScheduleGenerator.js'
 
 // TODO: add fliter schedules by free days
+const ACTIVE_FILTER_COLOR = '#41b53f'
+const DEFAULT_FILTER_COLOR = '#3f51b5'
+const FILTER_GROUPS = ['attendance', 'offday', 'gap']
+const OFF_DAY_LABELS = {
+    1: 'السبت',
+    2: 'الاحد',
+    3: 'الاثنين',
+    4: 'الثلاثاء',
+    5: 'الاربعاء',
+    6: 'الخميس'
+}
+
+function getOffDayLabel(dayKey) {
+    return OFF_DAY_LABELS[dayKey] || `اليوم ${dayKey}`
+}
+
+function getScheduleGaps(ScheduleTimes) {
+    let totalGaps = 0
+    let times = ScheduleTimes.split(",").filter(Boolean).map((time) => Number(time))
+    let dayPeriodsMap = new Map()
+
+    times.forEach((time) => {
+        const day = Math.floor(time / 10)
+        const period = time % 10
+        if (!dayPeriodsMap.has(day)) {
+            dayPeriodsMap.set(day, new Set())
+        }
+        dayPeriodsMap.get(day).add(period)
+    })
+
+    dayPeriodsMap.forEach((periodsSet) => {
+        let periods = Array.from(periodsSet).sort((a, b) => a - b)
+        for (let i = 0; i < periods.length - 1; i++) {
+            const gap = periods[i + 1] - periods[i] - 1
+            if (gap > 0) totalGaps += gap
+        }
+    })
+
+    return totalGaps
+}
 
 function drawSchedule(ScheduleGroupsindexes) {
     let { ScheduleTextFormat, ScheduleTimes } = getScheduleInfo(ScheduleGroupsindexes)
 
     // Get Free Days As String
     let freeDays = getNoAttendanceDays(ScheduleTimes, true);
-    freeDays = freeDays + "<br>" + ScheduleTextFormat
+    let gaps = getScheduleGaps(ScheduleTimes)
+    freeDays = freeDays + "<br>" + "الفجوات:" + gaps + "<br>" + ScheduleTextFormat
     tableInfo.style.display = "block"
     tableInfo.innerHTML = freeDays
 
@@ -117,21 +158,45 @@ function enableTravelse(selectclass) {
     prev.disabled = false
 }
 
-function filterSchedulesByAttandacneDay(event) {
-    let thisAttBTN = event.target
-    thisAttBTN.style.backgroundColor = '#41b53f'
+function setActiveFilterButton(selectclass, group, key) {
+    let filterButtons = document.querySelectorAll(`[selectclass="${selectclass}"][data-filter-group="${group}"]`)
+    filterButtons.forEach(filterButton => {
+        if (filterButton.getAttribute('key') == key) {
+            filterButton.style.backgroundColor = ACTIVE_FILTER_COLOR
+        } else {
+            filterButton.style.backgroundColor = DEFAULT_FILTER_COLOR
+        }
+    })
+}
+
+function resetOtherFilterGroups(selectclass, group) {
+    FILTER_GROUPS.forEach((filterGroup) => {
+        if (filterGroup == group) return
+        let filterButtons = document.querySelectorAll(`[selectclass="${selectclass}"][data-filter-group="${filterGroup}"]`)
+        if (filterButtons.length == 0) return
+        filterButtons.forEach(filterButton => {
+            if (filterButton.getAttribute('key') == 'all') {
+                filterButton.style.backgroundColor = ACTIVE_FILTER_COLOR
+            } else {
+                filterButton.style.backgroundColor = DEFAULT_FILTER_COLOR
+            }
+        })
+    })
+}
+
+function filterSchedulesByIndexes(event, group) {
+    let thisBTN = event.target
 
     // Get Schedule option Indexes of Current Filter
-    const optionIndexes = thisAttBTN.value.split(',')
-    const selectclass = thisAttBTN.getAttribute('selectclass')
-    const key = thisAttBTN.getAttribute('key')
-    changeAttandanBtnColor(selectclass, key)
+    const optionIndexes = thisBTN.value.split(',')
+    const selectclass = thisBTN.getAttribute('selectclass')
+    const key = thisBTN.getAttribute('key')
+    setActiveFilterButton(selectclass, group, key)
+    resetOtherFilterGroups(selectclass, group)
     enableTravelse(selectclass)
 
     let tableSelect = document.querySelector(`.${selectclass}`);
     let originOptions = Array.from(tableSelect.options)
-
-    // console.log('tableSelect', tableSelect)
 
     // Hide all Schedule Options
     originOptions.forEach(originOption => originOption.hidden = true)
@@ -144,12 +209,25 @@ function filterSchedulesByAttandacneDay(event) {
     drawSchedule(tableSelect.options[optionIndexes[0]].value)
 }
 
+function filterSchedulesByAttandacneDay(event) {
+    filterSchedulesByIndexes(event, 'attendance')
+}
+
+function filterSchedulesByOffDay(event) {
+    filterSchedulesByIndexes(event, 'offday')
+}
+
+function filterSchedulesByGap(event) {
+    filterSchedulesByIndexes(event, 'gap')
+}
+
 function showAllOptions(event) {
     let thisFullBTN = event.target
-    thisFullBTN.style.backgroundColor = '#41b53f'
     const selectclass = thisFullBTN.getAttribute('selectclass')
     const key = thisFullBTN.getAttribute('key')
-    changeAttandanBtnColor(selectclass, key)
+    const group = thisFullBTN.getAttribute('data-filter-group')
+    setActiveFilterButton(selectclass, group, key)
+    resetOtherFilterGroups(selectclass, group)
     enableTravelse(selectclass)
     let tableSelect = document.querySelector(`.${selectclass}`)
     let options = Array.from(tableSelect.options)
@@ -170,8 +248,9 @@ function createButtonsofAttandanceMap(attendanceDaysMap) {
     fullAttendanceBTN.setAttribute("id", 'fullAttendancebtn');
     fullAttendanceBTN.setAttribute("key", 'all');
     fullAttendanceBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
+    fullAttendanceBTN.setAttribute("data-filter-group", "attendance");
     fullAttendanceBTN.addEventListener("click", showAllOptions);
-    fullAttendanceBTN.style.backgroundColor = '#41b53f'
+    fullAttendanceBTN.style.backgroundColor = ACTIVE_FILTER_COLOR
     fullAttendanceBTN.innerHTML = `كل الاحتمالات : ${nooverlapcombintion.length}`;
     attendanceDiv.appendChild(fullAttendanceBTN);
 
@@ -182,6 +261,7 @@ function createButtonsofAttandanceMap(attendanceDaysMap) {
         attendanceBTN.setAttribute("key", key);
         attendanceBTN.setAttribute("value", value);
         attendanceBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
+        attendanceBTN.setAttribute("data-filter-group", "attendance");
         attendanceBTN.addEventListener("click", filterSchedulesByAttandacneDay);
         let length = value.length;
         attendanceBTN.innerHTML = `${key} : ${length}`;
@@ -189,19 +269,88 @@ function createButtonsofAttandanceMap(attendanceDaysMap) {
     }
 }
 
-function changeAttandanBtnColor(selectclass, key) {
-    let attendanceOptions = document.querySelectorAll(`[selectclass="${selectclass}"]`)
+function createButtonsOfOffDaysMap(offDaysMap) {
+    let attendanceDiv = document.querySelector('.attendanceDiv' + selectTableNum)
+    let offDaysDiv = document.createElement('div')
+    offDaysDiv.setAttribute('class', 'offDaysDiv')
+    offDaysDiv.innerHTML = 'ايام الاجازة : عدد الاحتمالات <br>';
+    attendanceDiv.appendChild(offDaysDiv);
 
-    attendanceOptions.forEach(attendanceOption => {
-        if (attendanceOption.getAttribute('key') != key) {
-            attendanceOption.style.backgroundColor = '#3f51b5'
-        }
-    })
-    // changing fullAttendancebtn color
-    if (key != 'all') {
-        let fullAttendancebtn = document.querySelector('#fullAttendancebtn')
-        fullAttendancebtn.style.backgroundColor = '#3f51b5'
+    if (offDaysMap.size == 0) {
+        let noOffDays = document.createElement('span')
+        noOffDays.innerHTML = 'لا توجد اجازات'
+        offDaysDiv.appendChild(noOffDays)
+        return
     }
+
+    var showAllOffDaysBTN = document.createElement("button");
+    showAllOffDaysBTN.type = "button";
+    showAllOffDaysBTN.setAttribute("id", 'offDaysAllBtn');
+    showAllOffDaysBTN.setAttribute("key", 'all');
+    showAllOffDaysBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
+    showAllOffDaysBTN.setAttribute("data-filter-group", "offday");
+    showAllOffDaysBTN.addEventListener("click", showAllOptions);
+    showAllOffDaysBTN.style.backgroundColor = ACTIVE_FILTER_COLOR
+    showAllOffDaysBTN.innerHTML = `عرض الكل`;
+    offDaysDiv.appendChild(showAllOffDaysBTN);
+
+    let sortedKeys = Array.from(offDaysMap.keys()).sort((a, b) => a - b)
+    sortedKeys.forEach((key) => {
+        let value = offDaysMap.get(key)
+        var offDayBTN = document.createElement("button");
+        offDayBTN.type = "button";
+        offDayBTN.setAttribute("id", 'offdaybtn');
+        offDayBTN.setAttribute("key", key);
+        offDayBTN.setAttribute("value", value);
+        offDayBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
+        offDayBTN.setAttribute("data-filter-group", "offday");
+        offDayBTN.addEventListener("click", filterSchedulesByOffDay);
+        let length = value.length;
+        offDayBTN.innerHTML = `${getOffDayLabel(key)} : ${length}`;
+        offDaysDiv.appendChild(offDayBTN);
+    })
+}
+
+function createButtonsOfGapsMap(gapsMap) {
+    let attendanceDiv = document.querySelector('.attendanceDiv' + selectTableNum)
+    let gapsDiv = document.createElement('div')
+    gapsDiv.setAttribute('class', 'gapsDiv')
+    gapsDiv.innerHTML = 'عدد الفجوات : عدد الاحتمالات <br>';
+    attendanceDiv.appendChild(gapsDiv);
+
+    if (gapsMap.size == 0) {
+        let noGaps = document.createElement('span')
+        noGaps.innerHTML = 'لا توجد فجوات'
+        gapsDiv.appendChild(noGaps)
+        return
+    }
+
+    var showAllGapsBTN = document.createElement("button");
+    showAllGapsBTN.type = "button";
+    showAllGapsBTN.setAttribute("id", 'gapsAllBtn');
+    showAllGapsBTN.setAttribute("key", 'all');
+    showAllGapsBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
+    showAllGapsBTN.setAttribute("data-filter-group", "gap");
+    showAllGapsBTN.addEventListener("click", showAllOptions);
+    showAllGapsBTN.style.backgroundColor = ACTIVE_FILTER_COLOR
+    showAllGapsBTN.innerHTML = `عرض الكل`;
+    gapsDiv.appendChild(showAllGapsBTN);
+
+    let sortedKeys = Array.from(gapsMap.keys()).sort((a, b) => a - b)
+    sortedKeys.forEach((key) => {
+        let value = gapsMap.get(key)
+        var gapBTN = document.createElement("button");
+        gapBTN.type = "button";
+        gapBTN.setAttribute("id", 'gapbtn');
+        gapBTN.setAttribute("key", key);
+        gapBTN.setAttribute("value", value);
+        gapBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
+        gapBTN.setAttribute("data-filter-group", "gap");
+        gapBTN.addEventListener("click", filterSchedulesByGap);
+        let length = value.length;
+        gapBTN.innerHTML = `${key} : ${length}`;
+        gapsDiv.appendChild(gapBTN);
+    })
 }
 
 
@@ -236,4 +385,4 @@ function printSchedule() {
 }
 
 
-export { drawSchedule, travelsSchedules, createButtonsofAttandanceMap, enableTravelse , setPrintUI , printSchedule }
+export { drawSchedule, travelsSchedules, createButtonsofAttandanceMap, createButtonsOfOffDaysMap, createButtonsOfGapsMap, enableTravelse , setPrintUI , printSchedule }

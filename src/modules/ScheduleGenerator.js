@@ -1,4 +1,4 @@
-import { drawSchedule, createButtonsofAttandanceMap, enableTravelse, travelsSchedules } from './ScheduleHandler.js'
+import { drawSchedule, createButtonsofAttandanceMap, createButtonsOfOffDaysMap, createButtonsOfGapsMap, enableTravelse, travelsSchedules } from './ScheduleHandler.js'
 
 function printCombination() {
     failedTestDiv.innerHTML = "";
@@ -148,39 +148,44 @@ function generateAllPossibleCombinations(arr) {
 }
 
 // TO:DO - Change Implementation
-function getNoAttendanceDays(currentScheduleTimes, isReturnAsText) {
+function getAttendanceInfo(currentScheduleTimes) {
     var from = [11, 21, 31, 41, 51]; // 61
     var TO = [18, 28, 38, 48, 58]; // 68
 
     var noAttendanceDays = 0;
-    var textResult = "";
     var nonAttendanceDaysList = [];
     let scheduleTimes = currentScheduleTimes.split(",");
 
     // Loop from day 1 to 5 through ScheduleTimes and check if current period allocate a day.
     for (var o = 0; o < from.length; o++) {
+        let hasAttendance = false;
 
         for (var i = 0; i < scheduleTimes.length; i++) {
             const currentPeriodTime = scheduleTimes[i];
             // if current period time is equal or in between from, to, then increment noAttendanceDays and break inner loop
             if (currentPeriodTime != '' && currentPeriodTime >= from[o] && currentPeriodTime <= TO[o]) {
                 noAttendanceDays += 1;
+                hasAttendance = true;
                 break;
             }
-            // keep checking until last period of the ScheduleTimes
-            // if inner loop didn't break, push current day [o+1] as a non attendance day
-            if (i == scheduleTimes.length - 1) {
-                nonAttendanceDaysList.push(o + 1)
-            }
+        }
+
+        if (!hasAttendance) {
+            nonAttendanceDaysList.push(o + 1)
         }
     }
 
-    textResult = "الحضور:" + noAttendanceDays;
+    return { noAttendanceDays, nonAttendanceDaysList };
+}
+
+function getNoAttendanceDays(currentScheduleTimes, isReturnAsText) {
+    const { noAttendanceDays, nonAttendanceDaysList } = getAttendanceInfo(currentScheduleTimes)
+    var textResult = "الحضور:" + noAttendanceDays;
 
     // If there is non Attendance Days
     if (nonAttendanceDaysList.length != 0) {
         textResult += "&#10;" + "الاجازة:";
-        for (i = 0; i < nonAttendanceDaysList.length; i++) {
+        for (let i = 0; i < nonAttendanceDaysList.length; i++) {
             switch (nonAttendanceDaysList[i]) {
                 case 1: textResult += "السبت "; break;
                 case 2: textResult += " الاحد "; break;
@@ -199,6 +204,63 @@ function getNoAttendanceDays(currentScheduleTimes, isReturnAsText) {
     // Return Number of Attendance Days as Number
     return noAttendanceDays;
 }
+
+function getScheduleGapMetrics(scheduleTimes) {
+    let times = scheduleTimes.split(",").filter(Boolean).map((time) => Number(time))
+    let dayPeriodsMap = new Map()
+    let totalGaps = 0
+    let earliestStart = Infinity
+    let latestEnd = -Infinity
+
+    times.forEach((time) => {
+        const day = Math.floor(time / 10)
+        const period = time % 10
+        if (!dayPeriodsMap.has(day)) {
+            dayPeriodsMap.set(day, new Set())
+        }
+        dayPeriodsMap.get(day).add(period)
+    })
+
+    dayPeriodsMap.forEach((periodsSet) => {
+        let periods = Array.from(periodsSet).sort((a, b) => a - b)
+        if (periods.length > 0) {
+            earliestStart = Math.min(earliestStart, periods[0])
+            latestEnd = Math.max(latestEnd, periods[periods.length - 1])
+        }
+        for (let i = 0; i < periods.length - 1; i++) {
+            const gap = periods[i + 1] - periods[i] - 1
+            if (gap > 0) totalGaps += gap
+        }
+    })
+
+    return {
+        totalGaps,
+        earliestStart: earliestStart == Infinity ? 0 : earliestStart,
+        latestEnd: latestEnd == -Infinity ? 0 : latestEnd,
+        totalSlots: times.length
+    }
+}
+
+function isBetterScheduleMetrics(candidate, currentBest) {
+    if (!currentBest) return true
+    if (candidate.attendanceDays !== currentBest.attendanceDays) {
+        return candidate.attendanceDays < currentBest.attendanceDays
+    }
+    if (candidate.totalGaps !== currentBest.totalGaps) {
+        return candidate.totalGaps < currentBest.totalGaps
+    }
+    if (candidate.totalSlots !== currentBest.totalSlots) {
+        return candidate.totalSlots < currentBest.totalSlots
+    }
+    if (candidate.latestEnd !== currentBest.latestEnd) {
+        return candidate.latestEnd < currentBest.latestEnd
+    }
+    if (candidate.earliestStart !== currentBest.earliestStart) {
+        return candidate.earliestStart > currentBest.earliestStart
+    }
+    return false
+}
+
 
 function checkOverlapping() {
     for (var k = 0; k < numresult.length; k++) {
@@ -329,6 +391,9 @@ function createCombinationTestUI() {
             enableTravelse(event.target.className)
         })
 
+        let gapsMap = new Map()
+        let bestScheduleMetrics = null
+        let bestScheduleIndex = 0
 
 
         for (var i = 0; i < nooverlapcombintion.length; i++) {
@@ -338,21 +403,57 @@ function createCombinationTestUI() {
             Tableoption.value = textresult[nooverlapcombintion[i]];
             tableSelect.appendChild(Tableoption);
 
-            let attendanceDays = getNoAttendanceDays(numresult[nooverlapcombintion[i]])
-            if (attendanceDays < 5) {
+            const scheduleTimes = numresult[nooverlapcombintion[i]]
+            const { noAttendanceDays, nonAttendanceDaysList } = getAttendanceInfo(scheduleTimes)
+            const gapMetrics = getScheduleGapMetrics(scheduleTimes)
+            const totalGaps = gapMetrics.totalGaps
+            if (noAttendanceDays < 5) {
                 // console.log('attendanceDays', attendanceDays, i)
                 // if attendanceDays exists, push the new index
-                if (attendanceDaysMap.has(attendanceDays)) {
-                    let arr = Array.from(attendanceDaysMap.get(attendanceDays)).concat([i])
-                    attendanceDaysMap.set(attendanceDays, arr)
+                if (attendanceDaysMap.has(noAttendanceDays)) {
+                    let arr = Array.from(attendanceDaysMap.get(noAttendanceDays)).concat([i])
+                    attendanceDaysMap.set(noAttendanceDays, arr)
                     // console.log('value', attendanceDaysMap.get(attendanceDays))
                 } else {
-                    attendanceDaysMap.set(attendanceDays, [i])
+                    attendanceDaysMap.set(noAttendanceDays, [i])
                 }
+            }
+
+            if (gapsMap.has(totalGaps)) {
+                let arr = Array.from(gapsMap.get(totalGaps)).concat([i])
+                gapsMap.set(totalGaps, arr)
+            } else {
+                gapsMap.set(totalGaps, [i])
+            }
+
+            let metrics = {
+                attendanceDays: noAttendanceDays,
+                totalGaps,
+                totalSlots: gapMetrics.totalSlots,
+                earliestStart: gapMetrics.earliestStart,
+                latestEnd: gapMetrics.latestEnd
+            }
+            if (isBetterScheduleMetrics(metrics, bestScheduleMetrics)) {
+                bestScheduleMetrics = metrics
+                bestScheduleIndex = i
+            }
+
+            if (nonAttendanceDaysList.length != 0) {
+                nonAttendanceDaysList.forEach((dayIndex) => {
+                    if (offDaysMap.has(dayIndex)) {
+                        let arr = Array.from(offDaysMap.get(dayIndex)).concat([i])
+                        offDaysMap.set(dayIndex, arr)
+                    } else {
+                        offDaysMap.set(dayIndex, [i])
+                    }
+                })
             }
         }
 
         createButtonsofAttandanceMap(attendanceDaysMap)
+        createBestScheduleButton(attendanceDiv, tableSelect, bestScheduleIndex, bestScheduleMetrics)
+        createButtonsOfOffDaysMap(offDaysMap)
+        createButtonsOfGapsMap(gapsMap)
         drawSchedule(tableSelect.options[0].value)
 
         // Travelsing Buttons
@@ -377,6 +478,40 @@ function createCombinationTestUI() {
     createScheduleHandlerUI()
 }
 
+function resetAllFilterButtons(selectclass) {
+    let filterButtons = document.querySelectorAll(`[selectclass="${selectclass}"][data-filter-group]`)
+    filterButtons.forEach((btn) => {
+        if (btn.getAttribute('key') == 'all') {
+            btn.style.backgroundColor = '#41b53f'
+        } else {
+            btn.style.backgroundColor = '#3f51b5'
+        }
+    })
+}
+
+function createBestScheduleButton(attendanceDiv, tableSelect, bestScheduleIndex, bestScheduleMetrics) {
+    if (!attendanceDiv || !tableSelect || tableSelect.options.length == 0) return
+    var bestBtn = document.createElement("button");
+    bestBtn.type = "button";
+    bestBtn.setAttribute("id", `bestScheduleBtn${selectTableNum}`);
+    let metricsText = ''
+    if (bestScheduleMetrics) {
+        metricsText = ` (حضور ${bestScheduleMetrics.attendanceDays} | فجوات ${bestScheduleMetrics.totalGaps})`
+    }
+    bestBtn.innerHTML = `أفضل جدول تلقائيًا${metricsText}`;
+    bestBtn.addEventListener("click", () => {
+        Array.from(tableSelect.options).forEach((option) => {
+            option.hidden = false
+        })
+        tableSelect.selectedIndex = bestScheduleIndex
+        drawSchedule(tableSelect.options[bestScheduleIndex].value)
+        enableTravelse(tableSelect.className)
+        resetAllFilterButtons(tableSelect.className)
+    })
+    attendanceDiv.insertBefore(bestBtn, attendanceDiv.firstChild)
+}
+
+
 function empty() {
     coursesTimes = []
     courseGroupsIndexes = []
@@ -385,6 +520,7 @@ function empty() {
     textresult = [];
     totalNoUnits = 0;
     attendanceDaysMap = new Map()
+    offDaysMap = new Map()
     if (document.getElementsByName('CombinationTestsContainer')[0] != undefined) {
         Autocollap(TestID - 1);
     }
