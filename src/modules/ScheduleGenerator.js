@@ -586,4 +586,4 @@ function toggleCombinationResult(event) {
     }
 }
 
-export { generateAllPossibleCombinations, printCombination, getNoAttendanceDays }
+export { generateAllPossibleCombinations, printCombination, getNoAttendanceDays, getScheduleGapMetrics }

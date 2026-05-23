@@ -1,4 +1,4 @@
-import { getNoAttendanceDays } from './ScheduleGenerator.js'
+import { getNoAttendanceDays, getScheduleGapMetrics } from './ScheduleGenerator.js'
 
 // TODO: add fliter schedules by free days
 const ACTIVE_FILTER_COLOR = '#41b53f'
@@ -17,37 +17,13 @@ function getOffDayLabel(dayKey) {
     return OFF_DAY_LABELS[dayKey] || `اليوم ${dayKey}`
 }
 
-function getScheduleGaps(ScheduleTimes) {
-    let totalGaps = 0
-    let times = ScheduleTimes.split(",").filter(Boolean).map((time) => Number(time))
-    let dayPeriodsMap = new Map()
-
-    times.forEach((time) => {
-        const day = Math.floor(time / 10)
-        const period = time % 10
-        if (!dayPeriodsMap.has(day)) {
-            dayPeriodsMap.set(day, new Set())
-        }
-        dayPeriodsMap.get(day).add(period)
-    })
-
-    dayPeriodsMap.forEach((periodsSet) => {
-        let periods = Array.from(periodsSet).sort((a, b) => a - b)
-        for (let i = 0; i < periods.length - 1; i++) {
-            const gap = periods[i + 1] - periods[i] - 1
-            if (gap > 0) totalGaps += gap
-        }
-    })
-
-    return totalGaps
-}
 
 function drawSchedule(ScheduleGroupsindexes) {
     let { ScheduleTextFormat, ScheduleTimes } = getScheduleInfo(ScheduleGroupsindexes)
 
     // Get Free Days As String
     let freeDays = getNoAttendanceDays(ScheduleTimes, true);
-    let gaps = getScheduleGaps(ScheduleTimes)
+    let gaps = getScheduleGapMetrics(ScheduleTimes).totalGaps
     freeDays = freeDays + "<br>" + "الفجوات:" + gaps + "<br>" + ScheduleTextFormat
     tableInfo.style.display = "block"
     tableInfo.innerHTML = freeDays
