@@ -107,6 +107,8 @@ async function loadHtml2Canvas() {
     await new Promise((resolve, reject) => {
         const script = document.createElement('script')
         script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'
+        script.integrity = 'sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H'
+        script.crossOrigin = 'anonymous'
         script.onload = resolve
         script.onerror = reject
         document.head.appendChild(script)
