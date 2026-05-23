@@ -171,7 +171,7 @@ function getAttendanceInfo(currentScheduleTimes) {
         }
 
         if (!hasAttendance) {
-            nonAttendanceDaysList.push(o + 1)
+            nonAttendanceDaysList.push(o + 1);
         }
     }
 
@@ -241,6 +241,7 @@ function getScheduleGapMetrics(scheduleTimes) {
     }
 }
 
+// Priority order: fewer attendance days → fewer gaps → fewer total slots → earlier finish → later start.
 function isBetterScheduleMetrics(candidate, currentBest) {
     if (!currentBest) return true
     if (candidate.attendanceDays !== currentBest.attendanceDays) {

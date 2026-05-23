@@ -353,14 +353,10 @@ function createCourseSelect(courseList) {
 }
 
 function handleCorrespondingOptionOfCheckbox(target) {
-    // const  = e.target
     const targetSelectID = target.id
     const selector = targetSelectID.includes('group') ? 'GroupSelect' : 'CourseSelect'
-    console.log(target.getAttribute('id'))
 
     const selectOptions = Array.from(document.querySelector(`#${selector}`).options)
-    console.log(target.getAttribute('index'))
-
     const index = target.getAttribute('index')
     if (target.checked) {
         selectOptions[index].selected = true

@@ -138,9 +138,9 @@ function setActiveFilterButton(selectclass, group, key) {
     let filterButtons = document.querySelectorAll(`[selectclass="${selectclass}"][data-filter-group="${group}"]`)
     filterButtons.forEach(filterButton => {
         if (filterButton.getAttribute('key') == key) {
-            filterButton.style.backgroundColor = ACTIVE_FILTER_COLOR
+            filterButton.style.backgroundColor = ACTIVE_FILTER_COLOR;
         } else {
-            filterButton.style.backgroundColor = DEFAULT_FILTER_COLOR
+            filterButton.style.backgroundColor = DEFAULT_FILTER_COLOR;
         }
     })
 }
@@ -152,9 +152,9 @@ function resetOtherFilterGroups(selectclass, group) {
         if (filterButtons.length == 0) return
         filterButtons.forEach(filterButton => {
             if (filterButton.getAttribute('key') == 'all') {
-                filterButton.style.backgroundColor = ACTIVE_FILTER_COLOR
+                filterButton.style.backgroundColor = ACTIVE_FILTER_COLOR;
             } else {
-                filterButton.style.backgroundColor = DEFAULT_FILTER_COLOR
+                filterButton.style.backgroundColor = DEFAULT_FILTER_COLOR;
             }
         })
     })
@@ -226,7 +226,7 @@ function createButtonsofAttandanceMap(attendanceDaysMap) {
     fullAttendanceBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
     fullAttendanceBTN.setAttribute("data-filter-group", "attendance");
     fullAttendanceBTN.addEventListener("click", showAllOptions);
-    fullAttendanceBTN.style.backgroundColor = ACTIVE_FILTER_COLOR
+    fullAttendanceBTN.style.backgroundColor = ACTIVE_FILTER_COLOR;
     fullAttendanceBTN.innerHTML = `كل الاحتمالات : ${nooverlapcombintion.length}`;
     attendanceDiv.appendChild(fullAttendanceBTN);
 
@@ -266,13 +266,13 @@ function createButtonsOfOffDaysMap(offDaysMap) {
     showAllOffDaysBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
     showAllOffDaysBTN.setAttribute("data-filter-group", "offday");
     showAllOffDaysBTN.addEventListener("click", showAllOptions);
-    showAllOffDaysBTN.style.backgroundColor = ACTIVE_FILTER_COLOR
+    showAllOffDaysBTN.style.backgroundColor = ACTIVE_FILTER_COLOR;
     showAllOffDaysBTN.innerHTML = `عرض الكل`;
     offDaysDiv.appendChild(showAllOffDaysBTN);
 
-    let sortedKeys = Array.from(offDaysMap.keys()).sort((a, b) => a - b)
+    let sortedKeys = Array.from(offDaysMap.keys()).sort((a, b) => a - b);
     sortedKeys.forEach((key) => {
-        let value = offDaysMap.get(key)
+        let value = offDaysMap.get(key);
         var offDayBTN = document.createElement("button");
         offDayBTN.type = "button";
         offDayBTN.setAttribute("id", 'offdaybtn');
@@ -308,13 +308,13 @@ function createButtonsOfGapsMap(gapsMap) {
     showAllGapsBTN.setAttribute("selectclass", "TableSelectT" + selectTableNum);
     showAllGapsBTN.setAttribute("data-filter-group", "gap");
     showAllGapsBTN.addEventListener("click", showAllOptions);
-    showAllGapsBTN.style.backgroundColor = ACTIVE_FILTER_COLOR
+    showAllGapsBTN.style.backgroundColor = ACTIVE_FILTER_COLOR;
     showAllGapsBTN.innerHTML = `عرض الكل`;
     gapsDiv.appendChild(showAllGapsBTN);
 
-    let sortedKeys = Array.from(gapsMap.keys()).sort((a, b) => a - b)
+    let sortedKeys = Array.from(gapsMap.keys()).sort((a, b) => a - b);
     sortedKeys.forEach((key) => {
-        let value = gapsMap.get(key)
+        let value = gapsMap.get(key);
         var gapBTN = document.createElement("button");
         gapBTN.type = "button";
         gapBTN.setAttribute("id", 'gapbtn');
