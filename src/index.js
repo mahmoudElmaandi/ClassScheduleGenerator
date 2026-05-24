@@ -17,13 +17,13 @@ window.unitLimit = 20
 
 // get coursesInfo file online
 const fetchCoursesInfoFile = async (filter = "cs") => {
-    const response = await fetch(`https://calm-gray-yak-toga.cyclic.app/latest-courses-file?filter=${filter}`);
+    const response = await fetch(`https://htireg-courses.onrender.com/latest-courses-file?filter=${filter}`);
     // const response = await fetch(`http://localhost:5000/latest-courses-file?filter=${filter}`);
     return await response.json();
 };
 
 const fetchCourseFiles = async () => {
-    const response = await fetch(`https://calm-gray-yak-toga.cyclic.app/courses-files`);
+    const response = await fetch(`https://htireg-courses.onrender.com/courses-files`);
     return await response.json();
 };
 
@@ -57,15 +57,6 @@ const fetchCourseFiles = async () => {
     });
     depSelect.disabled = false;
 
-    try {
-        const savedDep = localStorage.getItem('csgen_selected_dep')
-        if (savedDep && window.validDepValues.includes(savedDep)) {
-            depSelect.value = savedDep
-            depSelect.dispatchEvent(new Event('change'))
-        }
-    } catch (error) {
-        // ignore storage errors
-    }
 })();
 
 window.codesmap = new Map()

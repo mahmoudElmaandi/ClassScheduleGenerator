@@ -1,7 +1,7 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const JavaScriptObfuscator = require('webpack-obfuscator');
-const [isOptimized, isObfuscated] = [false, false];
+const [isOptimized, isObfuscated] = [true, true];
 const optimization = isOptimized ? {
     usedExports: true,
     sideEffects: true,
@@ -11,7 +11,7 @@ const optimization = isOptimized ? {
         terserOptions: {
             compress:
             {
-                drop_console: false
+                drop_console: true
             }
         }
     })]

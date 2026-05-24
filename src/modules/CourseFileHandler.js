@@ -1,7 +1,7 @@
 import { createBtn, chooseCoursesBtnObj, printCombinationsBtnObj } from '../buttons.js'
 import { csvToJSONObject } from '../csv-to-json.js'
 import { printCombination } from './ScheduleGenerator.js'
-import { selectCourses } from './CourseSelectHandler.js'
+import { selectCourses, CreateGroupUI } from './CourseSelectHandler.js'
 
 
 const inputfile = document.getElementById("inputfile")
@@ -108,7 +108,7 @@ function validitaFileType(file) {
 let DepOptionts = document.getElementById('Dep');
 DepOptionts.addEventListener('change', selectDepartment);
 
-function selectDepartment(e) {
+function selectDepartment() {
     const optionValue = DepOptionts.options[DepOptionts.selectedIndex].value
     if (validDepValues.includes(optionValue)) {
         safeSetItem(STORAGE_KEYS.selectedDep, optionValue)
@@ -204,7 +204,9 @@ function updateSelectionSummary() {
         .map(([code, count]) => `${code} (${count})`)
 
     const duplicatesText = duplicates.length ? `تكرار المادة: ${duplicates.join('، ')}` : 'لا يوجد تكرار'
-    summaryDiv.innerHTML = `عدد المواد المختارة: ${courseUnits.size} | عدد المجموعات المختارة: ${selectedGroups.length} | مجموع الوحدات: ${totalUnits}<br>${duplicatesText}`
+    summaryDiv.textContent = `عدد المواد المختارة: ${courseUnits.size} | عدد المجموعات المختارة: ${selectedGroups.length} | مجموع الوحدات: ${totalUnits}`
+    summaryDiv.appendChild(document.createElement('br'))
+    summaryDiv.appendChild(document.createTextNode(duplicatesText))
 }
 
 function applyGroupSelections(savedGroupRegCodes) {
@@ -254,11 +256,12 @@ function restoreSelections() {
     })
 
     updateCourseSummary()
-    selectCourses()
+    selectCourses(false)
 
     const savedGroups = safeParseJSON(safeGetItem(STORAGE_KEYS.selectedGroups), [])
     if (Array.isArray(savedGroups) && savedGroups.length > 0) {
         applyGroupSelections(savedGroups)
+        CreateGroupUI()
     } else {
         updateSelectionSummary()
     }
@@ -427,10 +430,7 @@ function createGroupSelect(groupList) {
 }
 
 function CreateSelectCourseUI() {
-    // Delete Header and Department Select
-    // document.getElementById('selectdep').remove()
-
-    // Hide home screen 
+    // Hide home screen
     document.querySelector('#home-screen').style.display = "none"
 
     // Choose course button
@@ -467,7 +467,6 @@ function CreateSelectCourseUI() {
     GroupDiv.appendChild(div);
     div.appendChild(CombinationBtn);
 
-    // window.scrollBy(0, 250);
     form.addEventListener("submit", printCombination);
     document.title = 'اختيار المواد'
     updateCourseSummary()

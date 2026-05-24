@@ -216,7 +216,7 @@ function showAllOptions(event) {
 
 function createButtonsofAttandanceMap(attendanceDaysMap) {
     let attendanceDiv = document.querySelector('.attendanceDiv' + selectTableNum)
-    attendanceDiv.innerHTML = 'عدد أيام الحضور : عدد الاحتمالات <br>';
+    attendanceDiv.innerHTML = '<div style="width:100%;text-align:center;">عدد أيام الحضور : عدد الاحتمالات</div>';
 
     // create a btn for showing all options
     var fullAttendanceBTN = document.createElement("button");

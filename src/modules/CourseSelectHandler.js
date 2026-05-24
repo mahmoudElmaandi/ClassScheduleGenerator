@@ -1,15 +1,15 @@
 import { createBtn , changeCoursesBtnObj } from '../buttons.js'
 
 // Get Selected Coourses
-function selectCourses() {
+function selectCourses(navigate = true) {
     var SlelectedCourses = Array.from(document.getElementById("CourseSelect").selectedOptions);
     var GroupOptions = document.getElementById("GroupSelect").options;
     let GroupCheckboxes = Array.from(document.querySelectorAll('#group-checkboxes input'))
 
     // remove limit
     if (SlelectedCourses.length <= 0) {
-       // TODO: change alert to a more user friendly way. 
-        window.alert("يرجى اختيار مادتين على الأقل");
+       // TODO: change alert to a more user friendly way.
+        if (navigate) window.alert("يرجى اختيار مادتين على الأقل");
     } else {
 
 
@@ -41,12 +41,12 @@ function selectCourses() {
         // uncheck group-selectall
         document.getElementById('group-selectall').checked = false;
 
-        CreateGroupUI()
+        if (navigate) CreateGroupUI()
     }
-    window.scrollBy(0, 120);
+    if (navigate) window.scrollBy(0, 120);
 }
 
-// Create Choose Groups UI 
+// Create Choose Groups UI
 function CreateGroupUI() {
     GroupDiv.style.display = "flex";
     CourseDiv.style.display = "none";
@@ -72,4 +72,4 @@ function changeSelectedCourses() {
     document.title = 'اختيار المواد'
 }
 
-export { selectCourses, changeSelectedCourses }
+export { selectCourses, changeSelectedCourses, CreateGroupUI }
